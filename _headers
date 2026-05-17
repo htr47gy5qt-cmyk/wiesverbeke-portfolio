@@ -1,0 +1,40 @@
+# ─────────────────────────────────────────────────────────────────────
+# Netlify cache headers
+# Place this file (named _headers, no extension) at the project root.
+# Netlify reads it automatically on deploy.
+# ─────────────────────────────────────────────────────────────────────
+
+# Photos — cache aggressively. If you ever need to bust the cache for a
+# specific photo, rename the file (e.g. add a version suffix).
+/photos/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Self-hosted fonts — same deal, cache forever.
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# CSS and JS — cache for a week. Long enough to be useful, short enough
+# that updates roll out without manual cache busting.
+/*.css
+  Cache-Control: public, max-age=604800, must-revalidate
+/*.js
+  Cache-Control: public, max-age=604800, must-revalidate
+
+# JSON data files — short cache. You edit these to update the gallery,
+# so we want visitors to see changes quickly.
+/data/*
+  Cache-Control: public, max-age=300, must-revalidate
+
+# HTML — very short cache. So new pages, fixes, and content go live fast.
+/*.html
+  Cache-Control: public, max-age=300, must-revalidate
+
+# Favicon files — cache for a month.
+/favicon.ico
+  Cache-Control: public, max-age=2592000
+/*.png
+  Cache-Control: public, max-age=2592000
+/*.svg
+  Cache-Control: public, max-age=2592000
+/site.webmanifest
+  Cache-Control: public, max-age=2592000

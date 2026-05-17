@@ -1,0 +1,50 @@
+/* ─────────────────────────────────────────────────────────────────────
+   Self-hosted fonts
+   Place this file at fonts/fonts.css and link it from each HTML page:
+       <link rel="stylesheet" href="fonts/fonts.css" />
+   instead of the Google Fonts <link>.
+   ───────────────────────────────────────────────────────────────────── */
+
+/* ── Cormorant Garamond ── */
+
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url('cormorant-garamond-v21-latin-300.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('cormorant-garamond-v21-latin-regular.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: italic;
+  font-weight: 300;
+  font-display: swap;
+  src: url('cormorant-garamond-v21-latin-300italic.woff2') format('woff2');
+}
+
+/* ── Jost ── */
+
+@font-face {
+  font-family: 'Jost';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url('jost-v20-latin-300.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Jost';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('jost-v20-latin-regular.woff2') format('woff2');
+}

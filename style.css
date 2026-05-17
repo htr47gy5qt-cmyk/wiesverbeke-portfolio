@@ -1,0 +1,693 @@
+/* ─────────────────────────────────────────
+   WIES VERBEKE — style.css
+   Pages: index · work · project · about
+   + Masonry gallery + Lightbox
+───────────────────────────────────────── */
+
+/* ── Variables ── */
+:root {
+  --cream:      #f5f2ee;
+  --ink:        #151210;
+  --ink-light:  #4a4540;
+  --gold:       #b89d72;
+  --gap:        clamp(0.6rem, 1.2vw, 1rem);
+  --radius:     2px;
+
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-ui:      'Jost', 'Helvetica Neue', sans-serif;
+
+  --nav-h: 64px;
+  --ease:  cubic-bezier(0.4, 0, 0.2, 1);
+  --t:     0.35s;
+}
+
+/* ── Reset ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--cream);
+  color: var(--ink);
+  font-family: var(--font-ui);
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  min-height: 100svh;
+}
+
+img { display: block; max-width: 100%; height: auto; }
+a   { color: inherit; text-decoration: none; }
+ul  { list-style: none; }
+
+/* ── Navigation ── */
+.nav {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 100;
+  height: var(--nav-h);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 clamp(1.5rem, 5vw, 4rem);
+  background: rgba(245, 242, 238, 0.72);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(184, 157, 114, 0.15);
+}
+
+.page-home .nav {
+  background: transparent;
+  border-bottom-color: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+.nav__logo {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+}
+
+.nav__links {
+  display: flex;
+  gap: 2.5rem;
+}
+
+.nav__links a {
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-light);
+  position: relative;
+  padding-bottom: 2px;
+  transition: color var(--t) var(--ease);
+}
+
+.nav__links a::after {
+  content: '';
+  position: absolute;
+  left: 0; bottom: 0;
+  width: 0; height: 1px;
+  background: var(--gold);
+  transition: width var(--t) var(--ease);
+}
+
+.nav__links a:hover,
+.nav__links a.nav__active { color: var(--ink); }
+.nav__links a:hover::after,
+.nav__links a.nav__active::after { width: 100%; }
+
+/* ══════════════════════════════════════
+   HOME PAGE
+══════════════════════════════════════ */
+.page-home {
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  min-height: 100svh;
+}
+
+/* No frosted glass on home — plain white nav */
+.page-home .nav {
+  background: #fff;
+  border-bottom-color: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+.home-stage {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: calc(var(--nav-h) + 2rem) clamp(2rem, 8vw, 8rem) 2rem;
+}
+
+.home-photo {
+  display: block;
+  max-width: 100%;
+  max-height: calc(100svh - var(--nav-h) - 8rem);
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  animation: photoReveal 1.2s var(--ease) forwards;
+  opacity: 0;
+}
+
+@keyframes photoReveal {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.home-footer {
+  display: flex;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.home-footer a {
+  color: var(--ink);
+  opacity: 0.45;
+  transition: opacity var(--t) var(--ease);
+}
+.home-footer a:hover { opacity: 1; }
+
+/* ══════════════════════════════════════
+   WORK PAGE — Project Cards
+══════════════════════════════════════ */
+.projects {
+  display: flex;
+  align-items: flex-start;
+  gap: clamp(1.5rem, 3vw, 3rem);
+  padding: calc(var(--nav-h) + 5rem) clamp(1.5rem, 5vw, 4rem) 5rem;
+  min-height: 100svh;
+}
+
+.project {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  cursor: pointer;
+}
+
+.project__cover {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  border-radius: var(--radius);
+  background: #e8e4de;
+}
+
+.project__cover img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s var(--ease), filter 0.8s var(--ease);
+  filter: brightness(0.92);
+}
+
+.project:hover .project__cover img {
+  transform: scale(1.05);
+  filter: brightness(0.75);
+}
+
+.project__overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity var(--t) var(--ease);
+}
+
+.project:hover .project__overlay { opacity: 1; }
+
+.project__cover--placeholder { background: #e0dbd4; }
+.project__overlay--always    { opacity: 1; }
+
+.project__cta {
+  font-family: var(--font-ui);
+  font-size: 0.7rem;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #f5f2ee;
+  border-bottom: 1px solid rgba(245, 242, 238, 0.5);
+  padding-bottom: 2px;
+}
+
+.project__meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.project__title {
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 2vw, 1.6rem);
+  font-weight: 300;
+  letter-spacing: 0.01em;
+  transition: color var(--t) var(--ease);
+}
+.project:hover .project__title { color: var(--ink-light); }
+
+.project__count {
+  font-family: var(--font-ui);
+  font-size: 0.65rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+/* ══════════════════════════════════════
+   PROJECT PAGE HEADER
+══════════════════════════════════════ */
+.page-header {
+  padding: calc(var(--nav-h) + 3.5rem) clamp(1.5rem, 5vw, 4rem) 2.5rem;
+}
+
+.back-link {
+  display: inline-block;
+  font-family: var(--font-ui);
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-light);
+  margin-bottom: 1.5rem;
+  transition: color var(--t) var(--ease);
+}
+.back-link:hover { color: var(--ink); }
+
+.eyebrow {
+  font-family: var(--font-ui);
+  font-size: 0.65rem;
+  font-weight: 400;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-top: 0.5rem;
+}
+
+.page-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3.25rem);
+  font-weight: 300;
+  letter-spacing: 0.01em;
+  margin-bottom: 0.25rem;
+}
+
+/* ══════════════════════════════════════
+   MASONRY GALLERY
+   Uses CSS columns — each photo keeps
+   its natural aspect ratio automatically.
+══════════════════════════════════════ */
+.gallery {
+  padding-bottom: clamp(4rem, 8vh, 7rem);
+}
+
+.gallery__grid {
+  column-count: 3;
+  column-gap: var(--gap);
+  padding: 0 clamp(1.5rem, 5vw, 4rem);
+}
+
+.gallery__item {
+  break-inside: avoid;        /* never cut a photo across columns */
+  margin-bottom: var(--gap);
+  overflow: hidden;
+  border-radius: var(--radius);
+  background: #e8e4de;
+  cursor: zoom-in;
+  position: relative;
+}
+
+/* img fills the item naturally — height is auto so ratio is preserved */
+.gallery__item img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.7s var(--ease), filter 0.7s var(--ease);
+  filter: brightness(0.97);
+}
+
+.gallery__item:hover img {
+  transform: scale(1.03);
+  filter: brightness(1.05);
+}
+
+/* Fade-in on scroll */
+.fade-target {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+  will-change: opacity, transform;
+}
+.fade-target.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ══════════════════════════════════════
+   LIGHTBOX
+══════════════════════════════════════ */
+.lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  background: rgba(15, 12, 10, 0.97);
+  align-items: center;
+  justify-content: center;
+}
+
+.lightbox.is-open {
+  display: flex;
+  animation: lbFadeIn 0.3s var(--ease);
+}
+
+@keyframes lbFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.lightbox__stage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: clamp(3rem, 6vw, 5rem);
+}
+
+.lightbox__img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: var(--radius);
+  animation: lbImgIn 0.35s var(--ease);
+  box-shadow: 0 32px 80px rgba(0,0,0,0.7);
+}
+
+@keyframes lbImgIn {
+  from { opacity: 0; transform: scale(0.96); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+.lightbox__close {
+  position: absolute;
+  top: 1.5rem; right: 2rem;
+  background: none;
+  border: none;
+  color: rgba(245, 242, 238, 0.55);
+  font-size: 2.5rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: color var(--t) var(--ease), transform var(--t) var(--ease);
+  z-index: 10;
+}
+.lightbox__close:hover { color: #fff; transform: rotate(90deg); }
+
+.lightbox__arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: rgba(245, 242, 238, 0.45);
+  font-size: 2rem;
+  cursor: pointer;
+  padding: 1rem 1.5rem;
+  transition: color var(--t) var(--ease);
+  z-index: 10;
+}
+.lightbox__arrow:hover { color: #fff; }
+.lightbox__arrow--prev { left: 0.5rem; }
+.lightbox__arrow--next { right: 0.5rem; }
+
+/* ── Lightbox metadata ── */
+.lightbox__metadata {
+  position: absolute;
+  bottom: clamp(1.2rem, 3vh, 2rem);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.6rem;
+  white-space: normal;
+  max-width: 90vw;
+  text-align: center;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.lightbox__meta-location {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(0.78rem, 1.2vw, 0.92rem);
+  color: rgba(245, 242, 238, 0.75);
+  letter-spacing: 0.02em;
+}
+
+.lightbox__meta-sep {
+  font-family: var(--font-ui);
+  font-size: 0.55rem;
+  color: rgba(245, 242, 238, 0.3);
+  line-height: 1;
+}
+
+.lightbox__meta-date,
+.lightbox__meta-filmstock {
+  font-family: var(--font-ui);
+  font-weight: 300;
+  font-size: clamp(0.65rem, 1vw, 0.75rem);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(245, 242, 238, 0.5);
+}
+
+/* ══════════════════════════════════════
+   ABOUT PAGE
+══════════════════════════════════════ */
+.about {
+  min-height: calc(100svh - var(--nav-h) - 120px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: clamp(3rem, 8vw, 8rem);
+  padding: calc(var(--nav-h) + 4rem) clamp(1.5rem, 5vw, 4rem) 4rem;
+}
+
+.about__inner { max-width: 480px; flex-shrink: 0; }
+
+.about__photo {
+  flex-shrink: 0;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: #e8e4de;
+  margin-left: auto;
+}
+
+.about__portrait {
+  display: block;
+  width: auto;
+  height: auto;
+  max-height: calc(100svh - var(--nav-h) - 8rem);
+  max-width: 100%;
+  object-fit: contain;
+}
+
+.about__text {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 2.5vw, 1.9rem);
+  font-weight: 300;
+  line-height: 1.65;
+  color: var(--ink);
+  margin-top: 1rem;
+}
+
+.about__contact {
+  display: inline-block;
+  margin-top: 2.5rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-light);
+  border-bottom: 1px solid var(--gold);
+  padding-bottom: 2px;
+  transition: color var(--t) var(--ease);
+}
+.about__contact:hover { color: var(--ink); }
+
+/* ══════════════════════════════════════
+   FOOTER
+══════════════════════════════════════ */
+.footer {
+  padding: clamp(2rem, 4vh, 3.5rem) clamp(1.5rem, 5vw, 4rem);
+  border-top: 1px solid rgba(184, 157, 114, 0.25);
+}
+
+.footer__inner {
+  display: flex;
+  align-items: baseline;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.footer__name {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 400;
+}
+
+.footer__email {
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  color: var(--ink-light);
+  border-bottom: 1px solid transparent;
+  padding-bottom: 1px;
+  transition: border-color var(--t) var(--ease), color var(--t) var(--ease);
+}
+.footer__email:hover { color: var(--ink); border-color: var(--gold); }
+
+.footer__instagram {
+  color: var(--ink-light);
+  opacity: 0.55;
+  display: flex;
+  align-items: center;
+  transition: opacity var(--t) var(--ease), color var(--t) var(--ease);
+}
+.footer__instagram:hover { opacity: 1; color: var(--ink); }
+
+.footer__copy {
+  margin-left: auto;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  color: var(--ink-light);
+}
+
+
+/* ══════════════════════════════════════
+   MOBILE NAV (base styles — must come BEFORE the @media queries
+   below, so the @media rules can override them)
+══════════════════════════════════════ */
+
+/* ── HAMBURGER BUTTON ── */
+.nav__toggle {
+  display: none;             /* hidden by default; shown via the media query */
+  background: none;
+  border: none;
+  padding: 0.5rem;
+  cursor: pointer;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  width: 36px;
+  height: 36px;
+  z-index: 9100;             /* above the mobile menu so the X stays tappable */
+  position: relative;
+}
+
+.nav__toggle-bar {
+  display: block;
+  width: 22px;
+  height: 1px;
+  background: var(--ink);
+  transition: transform var(--t) var(--ease), opacity var(--t) var(--ease);
+  transform-origin: center;
+}
+
+/* ── MOBILE FULL-SCREEN MENU ── */
+.nav__mobile {
+  position: fixed;
+  inset: 0;
+  z-index: 9000;             /* above lightboxes, photo cards, and the nav bar */
+  background: var(--cream);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2.5rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--t) var(--ease);
+}
+
+.nav__mobile a {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 300;
+  color: var(--ink);
+  letter-spacing: 0.02em;
+  position: relative;
+  padding-bottom: 4px;
+}
+
+.nav__mobile a::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 0;
+  height: 1px;
+  background: var(--gold);
+  transition: width var(--t) var(--ease), left var(--t) var(--ease);
+}
+
+.nav__mobile a:hover::after,
+.nav__mobile a.nav__active::after {
+  width: 100%;
+  left: 0;
+}
+/* ══════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════ */
+@media (max-width: 900px) {
+  .projects {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 3rem;
+  }
+  .project__cover { aspect-ratio: 4 / 3; }
+  .gallery__grid  { column-count: 2; }
+  .about {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .about__photo {
+    width: 100%;
+    max-width: 100%;
+    aspect-ratio: 4 / 3;
+  }
+}
+
+@media (max-width: 768px) {
+  .nav__links { gap: 1.5rem; }
+}
+
+@media (max-width: 480px) {
+  /* Hide the inline nav links — they're replaced by a hamburger menu */
+  .nav__links { display: none; }
+
+  /* Single-column gallery on phones */
+  .gallery__grid { column-count: 1; }
+
+  /* Show the hamburger button only on small screens */
+  .nav__toggle { display: flex; }
+
+  /* When the menu is open, swap the icon to an "X" */
+  body.nav-open .nav__toggle-bar:nth-child(1) {
+    transform: translateY(6px) rotate(45deg);
+  }
+  body.nav-open .nav__toggle-bar:nth-child(2) {
+    opacity: 0;
+  }
+  body.nav-open .nav__toggle-bar:nth-child(3) {
+    transform: translateY(-6px) rotate(-45deg);
+  }
+
+  /* Full-screen menu overlay */
+  body.nav-open .nav__mobile {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  /* Lift the nav bar above the overlay so the hamburger X stays tappable */
+  body.nav-open .nav {
+    z-index: 9200;
+    background: transparent;
+    border-bottom-color: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+  body.nav-open { overflow: hidden; }
+}

@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Analog — Wies Verbeke</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="fonts/fonts.css" />
+  <style>
+    :root {
+      --cream:     #f5f2ee;
+      --ink:       #151210;
+      --ink-light: #4a4540;
+      --gold:      #b89d72;
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --font-ui:      'Jost', 'Helvetica Neue', sans-serif;
+      --ease: cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      width: 100%; height: 100%;
+      overflow: hidden;
+      background: var(--cream);
+      color: var(--ink);
+      font-family: var(--font-ui);
+      font-weight: 300;
+      -webkit-font-smoothing: antialiased;
+      cursor: none;
+    }
+
+    /* ── NAV ── */
+    .nav {
+      position: fixed;
+      inset: 0 0 auto 0;
+      z-index: 200;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 clamp(1.5rem, 5vw, 4rem);
+      background: rgba(245, 242, 238, 0.72);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(184, 157, 114, 0.15);
+    }
+
+    .nav__logo {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      color: var(--ink);
+      text-decoration: none;
+    }
+
+    .nav__links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav__links a {
+      font-family: var(--font-ui);
+      font-size: 0.72rem;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink-light);
+      text-decoration: none;
+      position: relative;
+      padding-bottom: 2px;
+      transition: color 0.35s var(--ease);
+    }
+
+    .nav__links a::after {
+      content: '';
+      position: absolute;
+      left: 0; bottom: 0;
+      width: 0; height: 1px;
+      background: var(--gold);
+      transition: width 0.35s var(--ease);
+    }
+
+    .nav__links a:hover { color: var(--ink); }
+    .nav__links a:hover::after,
+    .nav__links a.active::after { width: 100%; }
+    .nav__links a.active { color: var(--ink); }
+
+    /* ── STAGE ── */
+    #stage {
+      position: fixed;
+      inset: 0;
+      overflow: hidden;
+    }
+
+    /* ── HINT ── */
+    .hint {
+      position: fixed;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: var(--font-ui);
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--ink-light);
+      opacity: 1;
+      transition: opacity 1s var(--ease);
+      pointer-events: none;
+      z-index: 100;
+    }
+    .hint.hidden { opacity: 0; }
+
+    /* ── COUNTER ── */
+    .counter {
+      position: fixed;
+      bottom: 2.5rem;
+      right: clamp(1.5rem, 5vw, 4rem);
+      font-family: var(--font-ui);
+      font-size: 0.65rem;
+      letter-spacing: 0.14em;
+      color: var(--ink-light);
+      opacity: 0.6;
+      z-index: 100;
+      pointer-events: none;
+    }
+
+    /* ── FLOATING PHOTO CARDS ── */
+    .photo-card {
+      position: absolute;
+      cursor: none;
+      transform-origin: center center;
+      will-change: transform, opacity;
+      transition: box-shadow 0.3s var(--ease);
+    }
+
+    .photo-card img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .photo-card.is-newest:hover {
+      box-shadow: 0 20px 60px rgba(21, 18, 16, 0.35);
+      z-index: 50 !important;
+    }
+
+    /* ── CUSTOM CURSOR ── */
+    #cursor {
+      position: fixed;
+      width: 12px;
+      height: 12px;
+      border: 1px solid var(--ink);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: transform 0.08s var(--ease), width 0.2s var(--ease), height 0.2s var(--ease), background 0.2s var(--ease);
+      mix-blend-mode: multiply;
+    }
+
+    #cursor.over-photo {
+      width: 48px;
+      height: 48px;
+      background: rgba(184, 157, 114, 0.15);
+      border-color: var(--gold);
+    }
+
+    /* ── LIGHTBOX ── */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 500;
+      background: rgba(15, 12, 10, 0.97);
+      align-items: center;
+      justify-content: center;
+    }
+
+    .lightbox.is-open {
+      display: flex;
+      animation: lbIn 0.3s var(--ease);
+    }
+
+    @keyframes lbIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    .lightbox__stage {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%; height: 100%;
+      padding: clamp(3rem, 6vw, 5rem);
+    }
+
+    .lightbox__img {
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      border-radius: 2px;
+      box-shadow: 0 32px 80px rgba(0,0,0,0.7);
+      animation: imgIn 0.35s var(--ease);
+    }
+
+    @keyframes imgIn {
+      from { opacity: 0; transform: scale(0.96); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+
+    .lightbox__close {
+      position: absolute;
+      top: 1.5rem; right: 2rem;
+      background: none; border: none;
+      color: rgba(245, 242, 238, 0.55);
+      font-size: 2.5rem; line-height: 1;
+      cursor: pointer;
+      transition: color 0.35s var(--ease), transform 0.35s var(--ease);
+      z-index: 10;
+      font-family: var(--font-ui);
+    }
+    .lightbox__close:hover { color: #fff; transform: rotate(90deg); }
+
+    .lightbox__arrow {
+      position: absolute;
+      top: 50%; transform: translateY(-50%);
+      background: none; border: none;
+      color: rgba(245, 242, 238, 0.45);
+      font-size: 2rem; cursor: pointer;
+      padding: 1rem 1.5rem;
+      transition: color 0.35s var(--ease);
+      z-index: 10;
+      font-family: var(--font-ui);
+    }
+    .lightbox__arrow:hover { color: #fff; }
+    .lightbox__arrow--prev { left: 0.5rem; }
+    .lightbox__arrow--next { right: 0.5rem; }
+
+    .lightbox__meta {
+      position: absolute;
+      bottom: clamp(1.2rem, 3vh, 2rem);
+      left: 50%; transform: translateX(-50%);
+      display: flex; align-items: center; gap: 0.6rem;
+      white-space: nowrap; pointer-events: none; z-index: 10;
+    }
+
+    .lightbox__meta-location {
+      font-family: var(--font-display);
+      font-style: italic; font-weight: 300;
+      font-size: clamp(0.78rem, 1.2vw, 0.92rem);
+      color: rgba(245, 242, 238, 0.75);
+      letter-spacing: 0.02em;
+    }
+
+    .lightbox__meta-sep {
+      font-size: 0.5rem;
+      color: rgba(245, 242, 238, 0.3);
+    }
+
+    .lightbox__meta-date,
+    .lightbox__meta-film {
+      font-family: var(--font-ui);
+      font-weight: 300;
+      font-size: clamp(0.65rem, 1vw, 0.75rem);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(245, 242, 238, 0.5);
+    }
+
+    .clear-btn {
+      position: fixed;
+      bottom: 2.5rem;
+      left: clamp(1.5rem, 5vw, 4rem);
+      z-index: 100;
+      background: none;
+      border: 1px solid rgba(74, 69, 64, 0.35);
+      color: var(--ink-light);
+      font-family: var(--font-ui);
+      font-size: 0.65rem;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 0.45rem 1rem;
+      cursor: pointer;
+      border-radius: 2px;
+      transition: color 0.3s var(--ease), border-color 0.3s var(--ease), background 0.3s var(--ease);
+    }
+    .clear-btn:hover {
+      color: var(--ink);
+      border-color: var(--gold);
+      background: rgba(184, 157, 114, 0.08);
+    }
+
+    @media (max-width: 480px) {
+      /* Tighten the nav links on small screens, but keep them visible */
+      .nav__links { gap: 1.25rem; }
+      .nav__links a { font-size: 0.65rem; letter-spacing: 0.14em; }
+    }
+
+    /* ── TOUCH DEVICE ADJUSTMENTS ── */
+    @media (hover: none) and (pointer: coarse) {
+      /* Hide things that don't make sense without a hovering cursor */
+      #cursor { display: none; }
+      .hint   { display: none; }
+
+      /* Re-enable native scrolling on the body but lock the stage canvas
+         so the user can't accidentally scroll it. The stage takes the
+         full viewport. */
+      html, body { cursor: auto; touch-action: none; }
+
+      /* Smaller Clear button + position so it doesn't overlap content too much */
+      .clear-btn {
+        bottom: 1.25rem;
+        left: 1rem;
+        font-size: 0.6rem;
+        padding: 0.4rem 0.85rem;
+      }
+
+      /* Counter sits near the top right on phones */
+      .counter {
+        bottom: auto;
+        top: calc(64px + 1rem);
+        right: 1.25rem;
+        font-size: 0.6rem;
+      }
+
+      /* Small hint text on first load */
+      .touch-hint {
+        display: block;
+      }
+    }
+
+    /* Touch hint — only shown on touch devices, fades after first interaction */
+    .touch-hint {
+      display: none;
+      position: fixed;
+      bottom: 1.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: var(--font-ui);
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--ink-light);
+      text-align: center;
+      pointer-events: none;
+      z-index: 100;
+      transition: opacity 1s var(--ease);
+      white-space: nowrap;
+    }
+    .touch-hint.hidden { opacity: 0; }
+  </style>
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="Wies Verbeke" />
+    <link rel="manifest" href="/site.webmanifest" />
+  </head>
+<body>
+
+  <!-- ── NAV ── -->
+  <nav class="nav">
+    <a href="index.html" class="nav__logo">Wies Verbeke</a>
+    <ul class="nav__links">
+      <li><a href="work.html">Work</a></li>
+      <li><a href="analog.html" class="active">Analog</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+      <button class="nav__toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false">
+      <span class="nav__toggle-bar"></span>
+      <span class="nav__toggle-bar"></span>
+      <span class="nav__toggle-bar"></span>
+    </button>
+  </nav>
+
+  <!-- ── MOBILE FULL-SCREEN MENU ── -->
+  <div class="nav__mobile" id="nav-mobile">
+    <a href="work.html">Work</a>
+    <a href="analog.html">Analog</a>
+    <a href="about.html">About</a>
+  </div>
+
+
+  <!-- ── TOUCH HINT (only visible on touch devices) ── -->
+  <div class="touch-hint" id="touch-hint">Drag your finger to explore</div>
+
+  <!-- ── CANVAS ── -->
+  <div id="stage"></div>
+
+  <!-- ── UI ── -->
+  <div class="hint" id="hint">Move your mouse to explore</div>
+  <div class="counter" id="counter"></div>
+  <button class="clear-btn" id="clear-btn">Clear</button>
+  <div id="cursor"></div>
+
+  <!-- ── LIGHTBOX ── -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true">
+    <button class="lightbox__close" id="lb-close" aria-label="Close">&times;</button>
+    <button class="lightbox__arrow lightbox__arrow--prev" id="lb-prev" aria-label="Previous">&#8592;</button>
+    <button class="lightbox__arrow lightbox__arrow--next" id="lb-next" aria-label="Next">&#8594;</button>
+    <div class="lightbox__stage">
+      <img class="lightbox__img" id="lb-img" src="" alt="" />
+    </div>
+    <div class="lightbox__meta">
+      <span class="lightbox__meta-location" id="lb-location"></span>
+      <span class="lightbox__meta-sep" id="lb-sep1">●</span>
+      <span class="lightbox__meta-date" id="lb-date"></span>
+      <span class="lightbox__meta-sep" id="lb-sep2">●</span>
+      <span class="lightbox__meta-film" id="lb-film"></span>
+    </div>
+  </div>
+
+  <script>
+  (function () {
+    "use strict";
+
+    /* ─────────────────────────────────────────
+       PHOTO LIST
+       Add or remove entries freely.
+       src: path relative to this HTML file
+       Each entry can also have location/date/filmstock
+       for the lightbox metadata (leave blank if unknown).
+    ───────────────────────────────────────── */
+    const PHOTOS = [
+      { src: "photos/000016640025.jpg",                    location: "Hong Kong, Sham Shui Po",        date: "2023", film: "Cinestill 800T" },
+      { src: "photos/000016670007.jpg",                    location: "Hong Kong, Jordan, Temple Street",        date: "2023", film: "Kodak Pro-Image 100" },
+      { src: "photos/28042026_02_fuji400_59.jpg",          location: "Hong Kong, Tsim Sha Tsui",        date: "2026", film: "Fujifilm C400" },
+      { src: "photos/28042026_02_fuji400_61.jpg",          location: "China, Shenzhen",                 date: "2026", film: "Fujifilm C400" },  
+      { src: "photos/28042026_05_FujiSuperiaPremium400_31.jpg", location: "China, Shenzhen",           date: "2026", film: "Fuji Superia Premium 400" },
+      { src: "photos/50y_Jubileum_34.jpg",                 location: "Belgium, Leuven",                 date: "2025",     film: "" },
+      { src: "photos/ardennen_Zef-6.jpg",                  location: "Belgium, Ardennes",date: "2024",     film: "Kodak P3200" },
+      { src: "photos/ardennen_Zef-16.jpg",                 location: "Belgium, Ardennes",date: "2024",     film: "Kodak P3200" },
+      { src: "photos/Documenting_life_fuji_C200_12.jpg",   location: "Netherlands, Amsterdam",                 date: "2025",     film: "Fujifilm C200" },
+      { src: "photos/FP4%2BOM4-T_1ste_om4_rol_1.jpg",     location: "Belgium, Leuven, Martelarenplein",                 date: "2024",     film: "Ilford FP4+" },
+      { src: "photos/FP4%2BOM4-T_1ste_om4_rol_16.jpg",    location: "Belgium, Leuven, Busstation",                 date: "2024",     film: "Ilford FP4+" },
+      { src: "photos/FR24_14.jpg",                         location: "South of France",                 date: "2024", film: "Harmann Phoenix I 200" },
+      { src: "photos/FR24_70.jpg",                         location: "South of France",                 date: "2024", film: "Fujifilm C200" },
+      { src: "photos/Fuji_c200_iron-man_19.jpg",           location: "Belgium, Aarschot",                 date: "2025",     film: "Fujifilm C200" },
+      { src: "photos/IMG_0294.jpg",                        location: "Hong Kong, Tsim Sha Tsui",        date: "2024", film: "Lomography 400" },
+      { src: "photos/IMG_0679.jpg",                        location: "Hong Kong, Sham Shui Po",        date: "2023", film: "" },
+      { src: "photos/IMG_1532.jpg",                        location: "Hong Kong, Lantau Island",        date: "2023", film: "" },
+      { src: "photos/IMG_2525.jpg",                        location: "Hong Kong, Chow Tin Tsuen Elementary School",        date: "2023", film: "" },
+      { src: "photos/IMG_2628.jpg",                        location: "Hong Kong, Tuen Mun, Automotive festival",        date: "2023", film: "" },
+      { src: "photos/IMG_2816.jpg",                        location: "Belgium, Tremelo",                 date: "2025",     film: "" },
+      { src: "photos/IMG_2852.jpg",                        location: "Hong Kong, Sham Shui Po",        date: "2023", film: "" },
+      { src: "photos/IMG_2865.jpg",                        location: "Hong Kong, Sham Shui Po",        date: "2023", film: "" },
+      { src: "photos/IMG_3066.jpg",                        location: "Hong Kong, Mong Kok",        date: "2023", film: "Kodak Ektar 100" },
+      { src: "photos/IMG_3154.jpg",                        location: "Hong Kong, Mong Kok",        date: "2023", film: "" },
+      { src: "photos/IMG_3521.jpg",                        location: "Hong Kong, Sheung Wan",        date: "2023", film: "" },
+      { src: "photos/IMG_3888.jpg",                        location: "Hong Kong, Kwun Tong",        date: "2024", film: "" },
+      { src: "photos/IMG_3914.jpg",                        location: "Hong Kong, Stanley",        date: "2023", film: "" },
+      { src: "photos/IMG_3921.jpg",                        location: "Hong Kong, Mong Kok",        date: "2024", film: "" },
+      { src: "photos/IMG_7851.jpg",                        location: "Germany, Berlin",                 date: "2023",     film: "Ilford HP5 Plus 400" },
+      { src: "photos/Kodak-Gold-200_K-en-W_12.jpg",        location: "Belgium, Luik",                 date: "2024",     film: "Kodak Gold 200" },
+      { src: "photos/KodakPortra400Seoul_40.jpg",          location: "South Korea, Seoul",date: "2025",   film: "Kodak Portra 400" },
+      { src: "photos/KodakUM400_Seoul_Yuzies36.jpg",       location: "South Korea, Seoul",date: "2025",   film: "Kodak UltraMax 400" },
+      { src: "photos/KodakUM400_Seoul_Yuzies60.jpg",       location: "Belgium, Leuven",date: "2025",   film: "Kodak UltraMax 400" },
+      { src: "photos/Life-in-Leuven_44.jpg",               location: "Belgium, Leuven, Bondgenotenlaan",  date: "2025",    film: "Fujifilm C200" },
+      { src: "photos/P17-Roadtrip-ZF_62.jpg",              location: "South of France",                 date: "2025",     film: "Fujifilm C200" },
+      { src: "photos/1758190450-25276400-2.jpg",            location: "China, Chongqing",                 date: "2025",     film: "" },
+      { src: "photos/1758190373-74445700.jpg",              location: "China, Chongqing",                 date: "2025",     film: "" },
+      { src: "photos/FR24_1.jpg",                           location: "South of France",                 date: "2024", film: "Harmann Phoenix I 200" },
+      { src: "photos/FR24_24.jpg",                          location: "South of France",                 date: "2024", film: "Fujifilm C200" },
+
+      // ── New HK photos (half of today's batch) ──
+      { src: "photos/000016640018.jpg",    location: "Hong Kong, Chow Tsin Tsuen",  date: "2023", film: "Cinestill 800T" },
+      { src: "photos/000016640021 2.jpg",  location: "Hong Kong, Sheung Shui",  date: "2023", film: "Cinestill 800T" },
+      { src: "photos/000016640022_2.jpg",  location: "Hong Kong, Mong Kok",  date: "2023", film: "Cinestill 800T" },
+      { src: "photos/000016640026.jpg",    location: "Hong Kong, Sham Shui Po",  date: "2023", film: "Cinestill 800T" },
+      { src: "photos/000016670011.jpg",  location: "Hong Kong, Jordan, Temple Street",  date: "2023", film: "Kodak Pro-image 100" },
+      { src: "photos/000020220009.jpg",    location: "Hong Kong, Wong Tai Sin",  date: "2023", film: "Slide film" },
+      { src: "photos/000020210036.jpg",    location: "Hong Kong, Wong Tai Sin",  date: "2023", film: "Infrared film" },
+      // ── New Street photos (half of today's batch) ──
+      
+      { src: "photos/IMG_7904.jpg",                location: "Germany, Berlin",  date: "2023",     film: "Ilford HP5 Plus 400" },
+      { src: "photos/IMG_7917.jpg",                location: "Germany, Berlin",  date: "2023",     film: "Ilford HP5 Plus 400" },
+      { src: "photos/IMG_7838.jpg",                location: "Germany, Berlin",  date: "2023",     film: "Ilford HP5 Plus 400" },
+      { src: "photos/KodakUM400_Seoul_Yuzies17.jpg", location: "South Korea, Seoul", date: "2025", film: "Kodak UltraMax 400" },
+      // ── New Landscape photos (half of today's batch) ──
+      { src: "photos/IMG_7847.jpg",                location: "Germany, Berlin",  date: "2023",     film: "Ilford HP5 Plus 400" },
+      { src: "photos/IMG_2077.jpg",                location: "Belgium, Brussels, Brussels Automotive Show",  date: "2024",     film: "" },
+      { src: "photos/IMG_6117.jpg",                location: "Belgium, Hoegaarden",  date: "2024",     film: "Fuji C200" },
+      { src: "photos/Portra_Batman_6.jpg",         location: "Belgium, Leuven",  date: "2024",     film: "Kodak Portra 400" },
+    ];
+
+    /* ─────────────────────────────────────────
+       CONFIG
+    ───────────────────────────────────────── */
+    const isTouch = window.matchMedia("(hover: none) and (pointer: coarse)").matches;
+
+    const THRESHOLD      = 200;   // px finger/mouse must travel before a new photo spawns
+    const MAX_CARDS      = isTouch ? 18 : 30;    // fewer on phones — smaller screen
+    const CARD_LONG_SIDE = isTouch ? 380 : 620;  // px — the longer edge of every card
+    const FADE_DURATION  = 600;   // ms for appear animation
+
+    /* ─────────────────────────────────────────
+       STATE
+    ───────────────────────────────────────── */
+    const stage       = document.getElementById("stage");
+    const hint        = document.getElementById("hint");
+    const touchHint   = document.getElementById("touch-hint");
+    const counterEl   = document.getElementById("counter");
+    const cursor      = document.getElementById("cursor");
+    const clearBtn    = document.getElementById("clear-btn");
+    const lb          = document.getElementById("lightbox");
+    const lbImg       = document.getElementById("lb-img");
+    const lbClose     = document.getElementById("lb-close");
+    const lbPrev      = document.getElementById("lb-prev");
+    const lbNext      = document.getElementById("lb-next");
+    const lbLocation  = document.getElementById("lb-location");
+    const lbDate      = document.getElementById("lb-date");
+    const lbFilm      = document.getElementById("lb-film");
+    const lbSep1      = document.getElementById("lb-sep1");
+    const lbSep2      = document.getElementById("lb-sep2");
+
+    let mouseX = -9999, mouseY = -9999;
+    let lastSpawnX = -9999, lastSpawnY = -9999;
+    let photoIndex  = 0;
+    let cards       = [];       // { el, photoIndex }
+    let zCounter    = 1;
+    let hintHidden  = false;
+    let lbCurrent   = -1;
+    let lbPhotoOrder = [];      // photos in order of appearance, for lb navigation
+    let clickableCard = null;   // the ONE card currently allowed to be clicked
+
+    /* ─────────────────────────────────────────
+       POINTER TRACKING (mouse on desktop, finger on touch)
+       Both feed into the same spawnIfFarEnough() function so
+       the logic stays identical across input types.
+    ───────────────────────────────────────── */
+    function spawnIfFarEnough(x, y) {
+      const dx = x - lastSpawnX;
+      const dy = y - lastSpawnY;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+
+      if (dist >= THRESHOLD) {
+        spawnCard(x, y);
+        lastSpawnX = x;
+        lastSpawnY = y;
+
+        if (!hintHidden) {
+          if (hint) hint.classList.add("hidden");
+          if (touchHint) touchHint.classList.add("hidden");
+          hintHidden = true;
+        }
+      }
+    }
+
+    // Desktop: mouse movement
+    document.addEventListener("mousemove", function (e) {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+
+      cursor.style.left = mouseX + "px";
+      cursor.style.top  = mouseY + "px";
+
+      spawnIfFarEnough(mouseX, mouseY);
+    });
+
+    // Touch: spawn while finger drags
+    function handleTouchPoint(e) {
+      // Don't spawn cards through nav, the lightbox, the clear button,
+      // the hamburger toggle, or while the mobile menu is open
+      if (e.target.closest(".nav, .nav__toggle, .nav__mobile, .lightbox, .clear-btn")) return;
+      if (document.body.classList.contains("nav-open")) return;
+
+      const t = e.touches[0] || e.changedTouches[0];
+      if (!t) return;
+      spawnIfFarEnough(t.clientX, t.clientY);
+    }
+
+    if (isTouch) {
+      // touchstart: spawn one immediately so tapping anywhere works
+      document.addEventListener("touchstart", handleTouchPoint, { passive: true });
+      // touchmove: spawn as the finger drags
+      document.addEventListener("touchmove",  handleTouchPoint, { passive: true });
+    }
+
+    /* ─────────────────────────────────────────
+       SPAWN A CARD
+       Builds the card SYNCHRONOUSLY (so it's immediately
+       registered as the clickable one), then asynchronously
+       fills in the image and final dimensions once the
+       photo's natural size is known.
+    ───────────────────────────────────────── */
+    function spawnCard(cx, cy) {
+      const photo = PHOTOS[photoIndex % PHOTOS.length];
+      photoIndex++;
+
+      // Clamp a card position so the card stays fully on-screen.
+      // (Important on mobile where a tap near the edge would otherwise
+      //  push a 380px card half off the viewport.)
+      function clampTopLeft(left, top, w, h) {
+        const margin = 8;
+        const vw = window.innerWidth;
+        const vh = window.innerHeight;
+        const minLeft = margin;
+        const maxLeft = Math.max(margin, vw - w - margin);
+        const minTop  = margin;
+        const maxTop  = Math.max(margin, vh - h - margin);
+        return {
+          left: Math.min(Math.max(left, minLeft), maxLeft),
+          top:  Math.min(Math.max(top,  minTop),  maxTop),
+        };
+      }
+
+      // 1. Create the card element NOW (placeholder size, hidden)
+      const card = document.createElement("figure");
+      card.className = "photo-card";
+      const initial = clampTopLeft(
+        cx - CARD_LONG_SIDE / 2,
+        cy - CARD_LONG_SIDE / 2,
+        CARD_LONG_SIDE,
+        CARD_LONG_SIDE
+      );
+      card.style.cssText = `
+        width: ${CARD_LONG_SIDE}px;
+        height: ${CARD_LONG_SIDE}px;
+        left: ${initial.left}px;
+        top: ${initial.top}px;
+        transform: scale(0.85);
+        opacity: 0;
+        z-index: ${zCounter++};
+        border-radius: 2px;
+        overflow: hidden;
+        box-shadow: 0 8px 32px rgba(21,18,16,0.18);
+        transition: opacity ${FADE_DURATION}ms cubic-bezier(0.4,0,0.2,1),
+                    transform ${FADE_DURATION}ms cubic-bezier(0.4,0,0.2,1);
+        pointer-events: none;
+      `;
+
+      // Cursor interaction — guarded: only respond if THIS card is the clickable one
+      card.addEventListener("mouseenter", () => {
+        if (card === clickableCard) cursor.classList.add("over-photo");
+      });
+      card.addEventListener("mouseleave", () => {
+        cursor.classList.remove("over-photo");
+      });
+
+      // Click → lightbox — guarded: ignore unless this card is the clickable one
+      card.addEventListener("click", function () {
+        if (card !== clickableCard) return;
+        openLightbox(photo);
+      });
+
+      stage.appendChild(card);
+      cards.push({ el: card, photo: photo });
+      lbPhotoOrder.push(photo);
+
+      // 2. Hand the "clickable" baton to this new card IMMEDIATELY,
+      //    before the image starts loading. No async window.
+      clickableCard = card;
+      cards.forEach((c) => {
+        const isNewest = (c.el === clickableCard);
+        c.el.style.pointerEvents = isNewest ? "auto" : "none";
+        c.el.style.cursor        = isNewest ? "none" : "default";
+        c.el.classList.toggle("is-newest", isNewest);
+      });
+
+      updateCounter();
+
+      // Cull oldest card if over limit
+      if (cards.length > MAX_CARDS) {
+        const oldest = cards.shift();
+        oldest.el.style.pointerEvents = "none";  // belt-and-suspenders
+        oldest.el.style.opacity = "0";
+        oldest.el.style.transform += " scale(0.8)";
+        setTimeout(() => {
+          if (oldest.el.parentNode) oldest.el.parentNode.removeChild(oldest.el);
+        }, FADE_DURATION);
+        lbPhotoOrder.shift();
+      }
+
+      // 3. Load the image asynchronously; when it arrives, resize the
+      //    placeholder to the photo's natural aspect ratio and fade in.
+      const probe = new window.Image();
+      probe.onload = function () {
+        // If this card was already culled (Clear pressed, etc.), abort
+        if (!card.parentNode) return;
+
+        const nw = probe.naturalWidth;
+        const nh = probe.naturalHeight;
+        const ar = nw / nh;
+
+        let w, h;
+        if (nw >= nh) {
+          w = CARD_LONG_SIDE;
+          h = Math.round(CARD_LONG_SIDE / ar);
+        } else {
+          h = CARD_LONG_SIDE;
+          w = Math.round(CARD_LONG_SIDE * ar);
+        }
+
+        // Resize and recentre on the original spawn point — clamped to viewport
+        const final = clampTopLeft(cx - w / 2, cy - h / 2, w, h);
+        card.style.width  = w + "px";
+        card.style.height = h + "px";
+        card.style.left   = final.left + "px";
+        card.style.top    = final.top  + "px";
+
+        // Inject the image
+        const img = document.createElement("img");
+        img.src = photo.src;
+        img.alt = photo.location || "Photograph by Wies Verbeke";
+        img.draggable = false;
+        card.appendChild(img);
+
+        // Animate in
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            card.style.opacity = "1";
+            card.style.transform = "scale(1)";
+          });
+        });
+      };
+      probe.src = photo.src;
+    } // end spawnCard
+
+    /* ─────────────────────────────────────────
+       COUNTER
+    ───────────────────────────────────────── */
+    function updateCounter() {
+      const shown = String(Math.min(cards.length, MAX_CARDS)).padStart(4, "0");
+      const total = String(PHOTOS.length).padStart(4, "0");
+      counterEl.textContent = shown + " / " + total;
+    }
+
+    /* ─────────────────────────────────────────
+       LIGHTBOX
+    ───────────────────────────────────────── */
+    function openLightbox(photo) {
+      lbCurrent = lbPhotoOrder.indexOf(photo);
+      if (lbCurrent === -1) lbCurrent = 0;
+      showLbPhoto(lbCurrent);
+      lb.classList.add("is-open");
+      document.body.style.overflow = "hidden";
+      lbClose.focus();
+    }
+
+    function showLbPhoto(idx) {
+      const p = lbPhotoOrder[idx];
+      if (!p) return;
+      lbImg.src = p.src;
+      lbImg.alt = p.location || "Photograph";
+
+      lbLocation.textContent  = p.location  || "";
+      lbDate.textContent      = p.date       || "";
+      lbFilm.textContent      = p.film       || "";
+
+      lbLocation.style.display = p.location  ? "" : "none";
+      lbDate.style.display     = p.date      ? "" : "none";
+      lbFilm.style.display     = p.film      ? "" : "none";
+      lbSep1.style.display     = (p.location && (p.date || p.film)) ? "" : "none";
+      lbSep2.style.display     = (p.date && p.film) ? "" : "none";
+    }
+
+    function closeLightbox() {
+      lb.classList.remove("is-open");
+      document.body.style.overflow = "";
+      lbImg.src = "";
+    }
+
+    function lbGoPrev() {
+      if (lbPhotoOrder.length === 0) return;
+      lbCurrent = (lbCurrent - 1 + lbPhotoOrder.length) % lbPhotoOrder.length;
+      showLbPhoto(lbCurrent);
+    }
+
+    function lbGoNext() {
+      if (lbPhotoOrder.length === 0) return;
+      lbCurrent = (lbCurrent + 1) % lbPhotoOrder.length;
+      showLbPhoto(lbCurrent);
+    }
+
+    lbClose.addEventListener("click", closeLightbox);
+    lbPrev.addEventListener("click", lbGoPrev);
+    lbNext.addEventListener("click", lbGoNext);
+
+    lb.addEventListener("click", function (e) {
+      if (e.target === lb || e.target === lb.querySelector(".lightbox__stage")) closeLightbox();
+    });
+
+    document.addEventListener("keydown", function (e) {
+      if (!lb.classList.contains("is-open")) return;
+      if (e.key === "Escape")     closeLightbox();
+      if (e.key === "ArrowLeft")  lbGoPrev();
+      if (e.key === "ArrowRight") lbGoNext();
+    });
+
+    /* ── Touch swipe inside the lightbox ── */
+    let lbTouchStartX = 0;
+    let lbTouchStartY = 0;
+
+    lb.addEventListener("touchstart", function (e) {
+      lbTouchStartX = e.changedTouches[0].clientX;
+      lbTouchStartY = e.changedTouches[0].clientY;
+    }, { passive: true });
+
+    lb.addEventListener("touchend", function (e) {
+      if (!lb.classList.contains("is-open")) return;
+      const dx = e.changedTouches[0].clientX - lbTouchStartX;
+      const dy = e.changedTouches[0].clientY - lbTouchStartY;
+      // Only trigger if horizontal swipe dominates (not an accidental vertical drag)
+      if (Math.abs(dx) < 40 || Math.abs(dx) < Math.abs(dy)) return;
+      if (dx < 0) lbGoNext();
+      else        lbGoPrev();
+    }, { passive: true });
+
+    /* ─────────────────────────────────────────
+       CLEAR
+    ───────────────────────────────────────── */
+    clearBtn.addEventListener("click", function () {
+      cards.forEach(c => {
+        if (c.el.parentNode) c.el.parentNode.removeChild(c.el);
+      });
+      cards = [];
+      lbPhotoOrder = [];
+      clickableCard = null;
+      photoIndex = 0;
+      zCounter = 1;
+      lastSpawnX = -9999;
+      lastSpawnY = -9999;
+      if (hint) hint.classList.remove("hidden");
+      if (touchHint) touchHint.classList.remove("hidden");
+      hintHidden = false;
+      cursor.classList.remove("over-photo");
+      updateCounter();
+    });
+
+    /* ─────────────────────────────────────────
+       INIT COUNTER
+    ───────────────────────────────────────── */
+    updateCounter();
+
+  })();
+  </script>
+  <script src="nav.js"></script>
+</body>
+</html>

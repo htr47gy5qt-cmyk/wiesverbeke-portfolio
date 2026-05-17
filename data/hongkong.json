@@ -1,0 +1,323 @@
+{
+  "id": "hongkong",
+  "title": "Hong Kong on Film",
+  "eyebrow": "Series II",
+  "cover": "photos/IMG_3066_2.jpg",
+  "photos": [
+    {
+      "src": "photos/000016640025.jpg",
+      "location": "Hong Kong, Sham Shui Po",
+      "date": "2023",
+      "filmstock": "Cinestill 800T",
+      "alt": "Hong Kong on film",
+      "width": 2400,
+      "height": 1625
+    },
+    {
+      "src": "photos/000016670007.jpg",
+      "location": "Hong Kong, Jordan, Temple Street",
+      "date": "2023",
+      "filmstock": "Kodak Pro-image 100",
+      "alt": "Hong Kong on film",
+      "width": 2400,
+      "height": 1625
+    },
+    {
+      "src": "photos/28042026_02_fuji400_59.jpg",
+      "location": "Hong Kong, Tsim Sha Tsui",
+      "date": "2026",
+      "filmstock": "Fujifilm 400",
+      "alt": "Hong Kong on film",
+      "width": 2400,
+      "height": 1694
+    },
+    {
+      "src": "photos/IMG_0294.jpg",
+      "location": "Hong Kong, Tsim Sha Tsui",
+      "date": "2023",
+      "filmstock": "Lomography 400",
+      "alt": "Hong Kong on film",
+      "width": 2400,
+      "height": 1625
+    },
+    {
+      "src": "photos/IMG_0313.jpg",
+      "location": "Hong Kong, Tsim Sha Tsui, MTR-station",
+      "date": "2023",
+      "filmstock": "Lomography 400",
+      "alt": "Hong Kong on film",
+      "width": 2400,
+      "height": 1625
+    },
+    {
+      "src": "photos/IMG_1532.jpg",
+      "location": "Hong Kong, Lantau Island",
+      "date": "2023",
+      "filmstock": "Ilford HP5 Plus 400",
+      "alt": "Hong Kong on film",
+      "width": 2400,
+      "height": 1625
+    },
+    {
+      "src": "photos/IMG_2525.jpg",
+      "location": "Hong Kong, Chow Tin Tsuen elementary school",
+      "date": "2023",
+      "filmstock": "",
+      "alt": "Hong Kong on film",
+      "width": 2400,
+      "height": 1625
+    },
+    {
+      "src": "photos/IMG_2630.jpg",
+      "location": "Hong Kong, Tuen Mun, Automotive festival",
+      "date": "2023",
+      "filmstock": "",
+      "alt": "Hong Kong on film",
+      "width": 2400,
+      "height": 1625
+    },
+    {
+      "src": "photos/IMG_2645.jpg",
+      "location": "Hong Kong, Tuen Mun, Automotive festival",
+      "date": "2023",
+      "filmstock": "",
+      "alt": "Hong Kong on film",
+      "width": 2400,
+      "height": 1625
+    },
+    {
+      "src": "photos/IMG_2852.jpg",
+      "location": "Hong Kong, Sham Shui Po",
+      "date": "2023",
+      "filmstock": "",
+      "alt": "Hong Kong on film",
+      "width": 2400,
+      "height": 1625
+    },
+    {
+      "src": "photos/IMG_2853.jpg",
+      "location": "Hong Kong, Sham Shui Po",
+      "date": "2023",
+      "filmstock": "",
+      "alt": "Hong Kong on film",
+      "width": 2400,
+      "height": 1625
+    },
+    {
+      "src": "photos/IMG_2865.jpg",
+      "location": "Hong Kong, Sham Shui Po",
+      "date": "2023",
+      "filmstock": "",
+      "alt": "Hong Kong on film",
+      "width": 2400,
+      "height": 1625
+    },
+    {
+      "src": "photos/IMG_3066.jpg",
+      "location": "Hong Kong, Mong Kok",
+      "date": "2023",
+      "filmstock": "Kodak Ektar 100",
+      "alt": "Hong Kong on film",
+      "width": 1625,
+      "height": 2400
+    },
+    {
+      "src": "photos/IMG_3068.jpg",
+      "location": "Hong Kong, Mong Kok",
+      "date": "2023",
+      "filmstock": "Kodak Ektar 100",
+      "alt": "Hong Kong on film",
+      "width": 2400,
+      "height": 1625
+    },
+    {
+      "src": "photos/IMG_3124.jpg",
+      "location": "Hong Kong, Lok Fu, Walled City park",
+      "date": "2023",
+      "filmstock": "Lomography 800",
+      "alt": "Hong Kong on film",
+      "width": 2400,
+      "height": 1625
+    },
+    {
+      "src": "photos/IMG_3150.jpg",
+      "location": "Hong Kong, Mong Kok",
+      "date": "2023",
+      "filmstock": "",
+      "alt": "Hong Kong on film",
+      "width": 2400,
+      "height": 1625
+    },
+    {
+      "src": "photos/IMG_3154.jpg",
+      "location": "Hong Kong, Mong Kok",
+      "date": "2023",
+      "filmstock": "",
+      "alt": "Hong Kong on film",
+      "width": 2400,
+      "height": 1625
+    },
+    {
+      "src": "photos/IMG_3564.jpg",
+      "location": "Hong Kong, Tsim Sha Tsui",
+      "date": "2023",
+      "filmstock": "Harmann Phoenix I 200",
+      "alt": "Hong Kong on film",
+      "width": 2400,
+      "height": 1625
+    },
+    {
+      "src": "photos/IMG_3912.jpg",
+      "location": "Hong Kong, Stanley",
+      "date": "2023",
+      "filmstock": "",
+      "alt": "Hong Kong on film",
+      "width": 2400,
+      "height": 1625
+    },
+    {
+      "src": "photos/IMG_3914.jpg",
+      "location": "Hong Kong, Stanley",
+      "date": "2023",
+      "filmstock": "",
+      "alt": "Two boats moored in a calm harbour",
+      "width": 2400,
+      "height": 1625
+    },
+    {
+      "src": "photos/IMG_3921.jpg",
+      "location": "Hong Kong, Mong Kok",
+      "date": "2023",
+      "filmstock": "",
+      "alt": "Hong Kong on film",
+      "width": 1625,
+      "height": 2400
+    },
+    {
+      "src": "photos/IMG_3922.jpg",
+      "location": "Hong Kong, Home",
+      "date": "2023",
+      "filmstock": "",
+      "alt": "Hong Kong on film",
+      "width": 2400,
+      "height": 1625
+    },
+    {
+      "src": "photos/000016640022 2.jpg",
+      "location": "Hong Kong, Mong Kok",
+      "date": "2023",
+      "filmstock": "",
+      "alt": "Hong Kong on film",
+      "width": 1625,
+      "height": 2400
+    },
+    {
+      "src": "photos/000016640031.jpg",
+      "location": "Hong Kong, Sham Shui Po",
+      "date": "2023",
+      "filmstock": "Cinestill 800T",
+      "alt": "Hong Kong on film",
+      "width": 2400,
+      "height": 1625
+    },
+    {
+      "src": "photos/000020190010.jpg",
+      "location": "Hong Kong, Tsim Sha Tsui",
+      "date": "2023",
+      "filmstock": "",
+      "alt": "Hong Kong on film",
+      "width": 1625,
+      "height": 2400
+    },
+    {
+      "src": "photos/000020220009.jpg",
+      "location": "Hong Kong, Diamond Hill",
+      "date": "2023",
+      "filmstock": "",
+      "alt": "Hong Kong on film",
+      "width": 2400,
+      "height": 1625
+    },
+    {
+      "src": "photos/000020210036.jpg",
+      "location": "Hong Kong, Diamond Hill",
+      "date": "2023",
+      "filmstock": "Infrared film",
+      "alt": "Hong Kong on film",
+      "width": 1625,
+      "height": 2400
+    },
+    {
+      "src": "photos/IMG_2557.jpg",
+      "location": "Hong Kong, Sheung Shui",
+      "date": "2023",
+      "filmstock": "Lomography 400",
+      "alt": "Hong Kong on film",
+      "width": 2400,
+      "height": 1625
+    },
+    {
+      "src": "photos/IMG_2864.jpg",
+      "location": "Hong Kong, Sham Shui Po, Vinyl Hero",
+      "date": "2023",
+      "filmstock": "",
+      "alt": "Hong Kong on film",
+      "width": 2400,
+      "height": 1625
+    },
+    {
+      "src": "photos/IMG_3067.jpg",
+      "location": "Hong Kong, Monk Kok",
+      "date": "2023",
+      "filmstock": "Kodak Ektar 100",
+      "alt": "Hong Kong on film",
+      "width": 2400,
+      "height": 1625
+    },
+    {
+      "src": "photos/IMG_3088.jpg",
+      "location": "Hong Kong, Sham Shui Po",
+      "date": "2023",
+      "filmstock": "",
+      "alt": "Hong Kong on film",
+      "width": 2400,
+      "height": 1625
+    },
+    {
+      "src": "photos/IMG_3155.jpg",
+      "location": "Hong Kong",
+      "date": "2023",
+      "filmstock": "",
+      "alt": "Hong Kong on film",
+      "width": 2400,
+      "height": 1625
+    },
+    {
+      "src": "photos/IMG_3497.jpg",
+      "location": "Hong Kong, Home",
+      "date": "2023",
+      "filmstock": "",
+      "alt": "Hong Kong on film",
+      "width": 2400,
+      "height": 1625
+    },
+    {
+      "src": "photos/IMG_3506.jpg",
+      "location": "Hong Kong, Fanling",
+      "date": "2023",
+      "filmstock": "",
+      "alt": "Hong Kong on film",
+      "width": 2400,
+      "height": 1625
+    },
+    {
+      "src": "photos/IMG_3570 2.jpg",
+      "location": "Hong Kong, Kowloon Tong",
+      "date": "2023",
+      "filmstock": "Harmann Phoenix I 200",
+      "alt": "Hong Kong on film",
+      "width": 2400,
+      "height": 1625
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+# macOS noise
+.DS_Store
+.AppleDouble
+.LSOverride
+Thumbs.db
+
+# Editor folders
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+*.log
+npm-debug.log*
+
+# Environment variables (safety net for secrets)
+.env
+.env.local
+.env.*.local
+
+# Node (just in case)
+node_modules/
+
+# Python caches from utility scripts
+__pycache__/
+*.pyc
+*.pyo
+
+# Photos hosted on object storage, not in Git
+photos/
