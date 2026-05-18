@@ -29,9 +29,9 @@
 
       // Sync the header text with the JSON, so the JSON is the single
       // source of truth (the HTML values act as a fallback if JS fails).
-      const titleEl   = document.getElementById("project-title");
+      const titleEl = document.getElementById("project-title");
       const eyebrowEl = document.getElementById("project-eyebrow");
-      if (titleEl   && data.title)   titleEl.textContent   = data.title;
+      if (titleEl && data.title) titleEl.textContent = data.title;
       if (eyebrowEl && data.eyebrow) eyebrowEl.textContent = data.eyebrow;
 
       // Build all figures
@@ -40,8 +40,8 @@
         const fig = document.createElement("figure");
         fig.className = "gallery__item";
         fig.dataset.src = photo.src;
-        if (photo.location)  fig.dataset.location  = photo.location;
-        if (photo.date)      fig.dataset.date      = photo.date;
+        if (photo.location) fig.dataset.location = photo.location;
+        if (photo.date) fig.dataset.date = photo.date;
         if (photo.filmstock) fig.dataset.filmstock = photo.filmstock;
 
         // <picture> with WebP source + JPG fallback.
@@ -49,9 +49,9 @@
         const webpSrc = photo.src.replace(/\.(jpe?g|png)$/i, ".webp");
 
         const picture = document.createElement("picture");
-        const source  = document.createElement("source");
+        const source = document.createElement("source");
         source.srcset = webpSrc;
-        source.type   = "image/webp";
+        source.type = "image/webp";
         picture.appendChild(source);
 
         const img = document.createElement("img");
@@ -59,17 +59,17 @@
         // Build a rich alt text from JSON metadata, for accessibility + image search.
         // Falls back to the JSON 'alt' field if no metadata is present.
         const altParts = [];
-        if (photo.alt)       altParts.push(photo.alt);
-        if (photo.location)  altParts.push(photo.location);
-        if (photo.date)      altParts.push(photo.date);
+        if (photo.alt) altParts.push(photo.alt);
+        if (photo.location) altParts.push(photo.location);
+        if (photo.date) altParts.push(photo.date);
         if (photo.filmstock) altParts.push("shot on " + photo.filmstock);
         img.alt = altParts.length ? altParts.join(" — ") : "Photograph by Wies Verbeke";
-        img.loading  = "lazy";
+        img.loading = "eager";
         img.decoding = "async";
 
         // Explicit dimensions prevent layout shift while the photo loads.
         if (photo.width && photo.height) {
-          img.width  = photo.width;
+          img.width = photo.width;
           img.height = photo.height;
         }
 
@@ -107,27 +107,26 @@
         setTimeout(() => el.classList.add("is-visible"), delay);
         obs.unobserve(el);
       });
-    }, { threshold: 0.08, rootMargin: "0px 0px -30px 0px" });
+    }, { threshold: 0, rootMargin: "0px 0px -30px 0px" });
 
     images.forEach(function (img) {
       img.classList.add("fade-target");
-      if (img.complete) { observer.observe(img); }
-      else { img.addEventListener("load", () => observer.observe(img), { once: true }); }
+      observer.observe(img);
     });
   }
 
   /* ── LIGHTBOX ── */
   function initLightbox() {
-    const lb         = document.getElementById("lightbox");
-    const lbImg      = document.getElementById("lb-img");
-    const lbClose    = document.getElementById("lb-close");
-    const lbPrev     = document.getElementById("lb-prev");
-    const lbNext     = document.getElementById("lb-next");
+    const lb = document.getElementById("lightbox");
+    const lbImg = document.getElementById("lb-img");
+    const lbClose = document.getElementById("lb-close");
+    const lbPrev = document.getElementById("lb-prev");
+    const lbNext = document.getElementById("lb-next");
     const lbLocation = document.getElementById("lb-location");
-    const lbDate     = document.getElementById("lb-date");
-    const lbFilm     = document.getElementById("lb-filmstock");
-    const lbSep1     = document.getElementById("lb-sep-1");
-    const lbSep2     = document.getElementById("lb-sep-2");
+    const lbDate = document.getElementById("lb-date");
+    const lbFilm = document.getElementById("lb-filmstock");
+    const lbSep1 = document.getElementById("lb-sep-1");
+    const lbSep2 = document.getElementById("lb-sep-2");
 
     if (!lb) return;
 
@@ -154,8 +153,8 @@
       lbImg.src = lightboxSrc(fig.dataset.src);
       lbImg.alt = fig.querySelector("img")?.alt || "";
 
-      const loc  = fig.dataset.location  || "";
-      const date = fig.dataset.date      || "";
+      const loc = fig.dataset.location || "";
+      const date = fig.dataset.date || "";
       const film = fig.dataset.filmstock || "";
 
       if (lbLocation) {
@@ -199,8 +198,8 @@
 
     document.addEventListener("keydown", function (e) {
       if (!lb.classList.contains("is-open")) return;
-      if (e.key === "Escape")     close();
-      if (e.key === "ArrowLeft")  prev();
+      if (e.key === "Escape") close();
+      if (e.key === "ArrowLeft") prev();
       if (e.key === "ArrowRight") next();
     });
 
@@ -220,7 +219,7 @@
       // Only trigger if horizontal swipe dominates (not an accidental scroll)
       if (Math.abs(dx) < 40 || Math.abs(dx) < Math.abs(dy)) return;
       if (dx < 0) next();
-      else        prev();
+      else prev();
     }, { passive: true });
   }
 
