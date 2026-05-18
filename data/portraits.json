@@ -2,10 +2,10 @@
   "id": "portraits",
   "title": "Portraits",
   "eyebrow": "Series IV",
-  "cover": "photos/1758190356-50958100.jpg",
+  "cover": "photos/1758190356-50958100.webp",
   "photos": [
     {
-      "src": "photos/IMG_2816.jpg",
+      "src": "photos/IMG_2816.webp",
       "location": "Belgium, Tremelo, Ninde",
       "date": "2025",
       "filmstock": "",
@@ -14,35 +14,35 @@
       "height": 1600
     },
     {
-      "src": "photos/Fuji_c200_iron-man_19.jpg",
+      "src": "photos/Fuji_c200_iron-man_19.webp",
       "location": "Belgium, Aarschot",
       "date": "2025",
       "filmstock": "Fujifilm C200",
       "alt": "Portrait of friend riding a motorbike."
     },
     {
-      "src": "photos/Kodak-Gold-200_K-en-W_14.jpg",
+      "src": "photos/Kodak-Gold-200_K-en-W_14.webp",
       "location": "Belgium, Luik",
       "date": "2024",
       "filmstock": "Kodak Gold 200",
       "alt": "Portrait of two friends posing with car doors."
     },
     {
-      "src": "photos/FR24_14.jpg",
+      "src": "photos/FR24_14.webp",
       "location": "South of France",
       "date": "2024",
       "filmstock": "Harmann Phoenix I 200",
       "alt": "Portrait of two friends posing with each other."
     },
     {
-      "src": "photos/IMG_7904.jpg",
+      "src": "photos/IMG_7904.webp",
       "location": "Germany, Berlin",
       "date": "2023",
       "filmstock": "Ilford HP5 Plus 400",
       "alt": "Portrait of friend in Berlin."
     },
     {
-      "src": "photos/1758190492-61513300.jpg",
+      "src": "photos/1758190492-61513300.webp",
       "location": "China, Chongqing",
       "date": "2025",
       "filmstock": "",

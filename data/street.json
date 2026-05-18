@@ -2,10 +2,10 @@
   "id": "street",
   "title": "Street Photography",
   "eyebrow": "Series I",
-  "cover": "photos/50y-Jubileum-34_copy.jpg",
+  "cover": "photos/50y-Jubileum-34_copy.webp",
   "photos": [
     {
-      "src": "photos/50y_Jubileum_34.jpg",
+      "src": "photos/50y_Jubileum_34.webp",
       "location": "Belgium, Leuven",
       "date": "2025",
       "filmstock": "Fuji c200",
@@ -14,7 +14,7 @@
       "height": 2400
     },
     {
-      "src": "photos/28042026_02_fuji400_68.jpg",
+      "src": "photos/28042026_02_fuji400_68.webp",
       "location": "China, Shenzhen",
       "date": "2026",
       "filmstock": "Fujifilm c400",
@@ -23,7 +23,7 @@
       "height": 1680
     },
     {
-      "src": "photos/28042026_02_fuji400_72.jpg",
+      "src": "photos/28042026_02_fuji400_72.webp",
       "location": "China, Shenzhen",
       "date": "2026",
       "filmstock": "Fujifilm c400",
@@ -32,7 +32,7 @@
       "height": 1650
     },
     {
-      "src": "photos/000292660029.jpg",
+      "src": "photos/000292660029.webp",
       "location": "Belgium, Leuven, Muntstraat Dulci",
       "date": "2026",
       "filmstock": "Fuji c200",
@@ -41,7 +41,7 @@
       "height": 1625
     },
     {
-      "src": "photos/1758190360-13521400.jpg",
+      "src": "photos/1758190360-13521400.webp",
       "location": "China, Chengdu",
       "date": "2025",
       "filmstock": "",
@@ -50,7 +50,7 @@
       "height": 1766
     },
     {
-      "src": "photos/1758190362-24793800.jpg",
+      "src": "photos/1758190362-24793800.webp",
       "location": "China, Chengdu",
       "date": "2025",
       "filmstock": "",
@@ -59,7 +59,7 @@
       "height": 2400
     },
     {
-      "src": "photos/1758190416-43194600_edited.jpg",
+      "src": "photos/1758190416-43194600_edited.webp",
       "location": "South Korea, Busan",
       "date": "2025",
       "filmstock": "",
@@ -68,7 +68,7 @@
       "height": 1750
     },
     {
-      "src": "photos/1758190422-86786300.jpg",
+      "src": "photos/1758190422-86786300.webp",
       "location": "South Korea, Busan",
       "date": "2025",
       "filmstock": "",
@@ -77,7 +77,7 @@
       "height": 1733
     },
     {
-      "src": "photos/1758190457-61345300-2.jpg",
+      "src": "photos/1758190457-61345300-2.webp",
       "location": "China, Chongqing",
       "date": "2025",
       "filmstock": "",
@@ -86,7 +86,7 @@
       "height": 1625
     },
     {
-      "src": "photos/1758190494-55840000.jpg",
+      "src": "photos/1758190494-55840000.webp",
       "location": "China, Chongqing",
       "date": "2025",
       "filmstock": "",
@@ -95,7 +95,7 @@
       "height": 1625
     },
     {
-      "src": "photos/ardennen_Zef-6.jpg",
+      "src": "photos/ardennen_Zef-6.webp",
       "location": "Belgium, Ardennes",
       "date": "2024",
       "filmstock": "Kodak P3200",
@@ -104,7 +104,7 @@
       "height": 1696
     },
     {
-      "src": "photos/FP4%2BOM4-T_1ste_om4_rol_1.jpg",
+      "src": "photos/FP4%2BOM4-T_1ste_om4_rol_1.webp",
       "location": "Belgium, Leuven, Martelarenplein",
       "date": "2024",
       "filmstock": "Ilford FP4+",
@@ -113,7 +113,7 @@
       "height": 1647
     },
     {
-      "src": "photos/KodakUM400_Seoul_Yuzies36.jpg",
+      "src": "photos/KodakUM400_Seoul_Yuzies36.webp",
       "location": "South Korea, Seoul",
       "date": "2025",
       "filmstock": "Kodak UltraMax 400",
@@ -122,7 +122,7 @@
       "height": 2400
     },
     {
-      "src": "photos/KodakPortra400Seoul_40.jpg",
+      "src": "photos/KodakPortra400Seoul_40.webp",
       "location": "South Korea, Seoul",
       "date": "2025",
       "filmstock": "Kodak Portra 400",
@@ -131,7 +131,7 @@
       "height": 1689
     },
     {
-      "src": "photos/Life-in-Leuven_44.jpg",
+      "src": "photos/Life-in-Leuven_44.webp",
       "location": "Belgium, Leuven, Bondgenotenlaan",
       "date": "2025",
       "filmstock": "Fuji c200",
@@ -140,7 +140,7 @@
       "height": 1690
     },
     {
-      "src": "photos/10052026_01_KodakTx400_22.jpg",
+      "src": "photos/10052026_01_KodakTx400_22.webp",
       "location": "China, Chengdu",
       "date": "2025",
       "filmstock": "Kodak Tri-X 400",
@@ -149,7 +149,7 @@
       "height": 1657
     },
     {
-      "src": "photos/10052026_03_KodakEastXX_45.jpg",
+      "src": "photos/10052026_03_KodakEastXX_45.webp",
       "location": "South Korea, Busan",
       "date": "2025",
       "filmstock": "Kodak Eastman Double-X",
@@ -158,7 +158,7 @@
       "height": 1645
     },
     {
-      "src": "photos/10052026_03_KodakEastXX_58.jpg",
+      "src": "photos/10052026_03_KodakEastXX_58.webp",
       "location": "South Korea, Busan",
       "date": "2025",
       "filmstock": "Kodak Eastman Double-X",
@@ -167,7 +167,7 @@
       "height": 1711
     },
     {
-      "src": "photos/28042026_04_Lomo800_10.jpg",
+      "src": "photos/28042026_04_Lomo800_10.webp",
       "location": "Belgium, Leuven",
       "date": "2026",
       "filmstock": "Lomography 800",
@@ -176,7 +176,7 @@
       "height": 1654
     },
     {
-      "src": "photos/IMG_7723.jpg",
+      "src": "photos/IMG_7723.webp",
       "location": "Hong Kong",
       "date": "2026",
       "filmstock": "Kodak Portra 800",
@@ -185,7 +185,7 @@
       "height": 1625
     },
     {
-      "src": "photos/1758190451-74825800-2.jpg",
+      "src": "photos/1758190451-74825800-2.webp",
       "location": "China, Chongqing, train to Wulong",
       "date": "2025",
       "filmstock": "",

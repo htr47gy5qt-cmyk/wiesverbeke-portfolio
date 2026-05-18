@@ -2,10 +2,10 @@
   "id": "landscapes",
   "title": "Landscapes",
   "eyebrow": "Series III",
-  "cover": "photos/1758190450-25276400-2_copy.jpg",
+  "cover": "photos/1758190450-25276400-2_copy.webp",
   "photos": [
     {
-      "src": "photos/28042026_01_cine800_59.jpg",
+      "src": "photos/28042026_01_cine800_59.webp",
       "location": "Belgium, Ghent-Bruges",
       "date": "2025",
       "filmstock": "Cinestill 800T",
@@ -14,7 +14,7 @@
       "height": 1625
     },
     {
-      "src": "photos/1758190373-74445700.jpg",
+      "src": "photos/1758190373-74445700.webp",
       "location": "China, Chongqing",
       "date": "2025",
       "filmstock": "",
@@ -23,7 +23,7 @@
       "height": 1625
     },
     {
-      "src": "photos/1758190419-55782500-4.jpg",
+      "src": "photos/1758190419-55782500-4.webp",
       "location": "South Korea, Busan",
       "date": "2025",
       "filmstock": "",
@@ -32,7 +32,7 @@
       "height": 1764
     },
     {
-      "src": "photos/1758190448-61499600.jpg",
+      "src": "photos/1758190448-61499600.webp",
       "location": "China, Chongqing",
       "date": "2025",
       "filmstock": "",
@@ -41,7 +41,7 @@
       "height": 1750
     },
     {
-      "src": "photos/FR24_1.jpg",
+      "src": "photos/FR24_1.webp",
       "location": "South of France",
       "date": "2024",
       "filmstock": "Harmann Phoenix II 200",
@@ -50,7 +50,7 @@
       "height": 1659
     },
     {
-      "src": "photos/FR24_24.jpg",
+      "src": "photos/FR24_24.webp",
       "location": "South of France",
       "date": "2024",
       "filmstock": "Fuji C200",
@@ -59,7 +59,7 @@
       "height": 1668
     },
     {
-      "src": "photos/FR24_62.jpg",
+      "src": "photos/FR24_62.webp",
       "location": "South of France",
       "date": "2024",
       "filmstock": "Fuji C200",
@@ -68,7 +68,7 @@
       "height": 1674
     },
     {
-      "src": "photos/IMG_5948.jpg",
+      "src": "photos/IMG_5948.webp",
       "location": "Belgium, Meerhout",
       "date": "2025",
       "filmstock": "Harmann Phoenix II 200",
@@ -77,7 +77,7 @@
       "height": 2400
     },
     {
-      "src": "photos/Portra_Batman_24.jpg",
+      "src": "photos/Portra_Batman_24.webp",
       "location": "Belgium, Tremelo, Ninde",
       "date": "2024",
       "filmstock": "Portra 400",
@@ -86,7 +86,7 @@
       "height": 1679
     },
     {
-      "src": "photos/ardennen_Zef-16.jpg",
+      "src": "photos/ardennen_Zef-16.webp",
       "location": "Belgium, Ardennes, Bouillon-Rochehaut",
       "date": "2024",
       "filmstock": "Kodak P3200",
@@ -95,7 +95,7 @@
       "height": 1663
     },
     {
-      "src": "photos/10052026_01_KodakTx400_19.jpg",
+      "src": "photos/10052026_01_KodakTx400_19.webp",
       "location": "China, Chengdu",
       "date": "2025",
       "filmstock": "Kodak Tri-X 400",
@@ -104,7 +104,7 @@
       "height": 1651
     },
     {
-      "src": "photos/10052026_03_KodakEastXX_83.jpg",
+      "src": "photos/10052026_03_KodakEastXX_83.webp",
       "location": "South Korea, Seoul",
       "date": "2025",
       "filmstock": "Kodak Eastman XX",
@@ -113,7 +113,7 @@
       "height": 1726
     },
     {
-      "src": "photos/10052026_IlfordDelta400_22.jpg",
+      "src": "photos/10052026_IlfordDelta400_22.webp",
       "location": "China, Chongqing",
       "date": "2025",
       "filmstock": "Ilford Delta 400",
@@ -122,7 +122,7 @@
       "height": 1656
     },
     {
-      "src": "photos/P17_Roadtrip ZF_2_40.jpg",
+      "src": "photos/P17_Roadtrip ZF_2_40.webp",
       "location": "South of France",
       "date": "2025",
       "filmstock": "Fuji c200",
@@ -131,7 +131,7 @@
       "height": 1561
     },
     {
-      "src": "photos/P17_Roadtrip_ZF_29.jpg",
+      "src": "photos/P17_Roadtrip_ZF_29.webp",
       "location": "South of France",
       "date": "2025",
       "filmstock": "Fuji c200",
@@ -140,7 +140,7 @@
       "height": 2400
     },
     {
-      "src": "photos/P17_Roadtrip_ZF_1.jpg",
+      "src": "photos/P17_Roadtrip_ZF_1.webp",
       "location": "South of France",
       "date": "2025",
       "filmstock": "Fuji c200",
@@ -149,7 +149,7 @@
       "height": 1172
     },
     {
-      "src": "photos/28042026_03_portra800_16.jpg",
+      "src": "photos/28042026_03_portra800_16.webp",
       "location": "Belgium, Leuven, Vismarkt",
       "date": "2025",
       "filmstock": "Kodak Portra 800",
@@ -158,7 +158,7 @@
       "height": 1653
     },
     {
-      "src": "photos/IMG_7516.jpg",
+      "src": "photos/IMG_7516.webp",
       "location": "Hong Kong, Fo Tan",
       "date": "2026",
       "filmstock": "Cinestill 800T",
@@ -167,7 +167,7 @@
       "height": 1625
     },
     {
-      "src": "photos/Documenting_life_fuji_C200_35.jpg",
+      "src": "photos/Documenting_life_fuji_C200_35.webp",
       "location": "Belgium, Leuven, Mincklers parking",
       "date": "2025",
       "filmstock": "Fuji C200",
