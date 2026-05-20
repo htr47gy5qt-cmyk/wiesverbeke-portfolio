@@ -13,7 +13,7 @@
   var DARK_BG   = "#131210";
 
   function current() {
-    return document.documentElement.getAttribute("data-theme") || "light";
+    return document.documentElement.classList.contains("dark") ? "dark" : "light";
   }
 
   var MOON_SVG = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
@@ -65,7 +65,7 @@
 
       setTimeout(function () {
         // Mid-point: curtain fully covers the page — switch the theme
-        document.documentElement.setAttribute("data-theme", next);
+        document.documentElement.classList.toggle("dark", next === "dark");
         try { localStorage.setItem("theme", next); } catch (e) {}
         updateBtn(btn, next);
 

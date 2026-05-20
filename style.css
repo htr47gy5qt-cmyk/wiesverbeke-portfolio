@@ -668,26 +668,26 @@ ul  { list-style: none; }
    Only hardcoded rgba values need explicit
    overrides below.
 ══════════════════════════════════════ */
-html[data-theme="dark"] {
+html.dark {
   --cream:     #131210;
   --ink:       #e8e3da;
   --ink-light: #908878;
 }
 
 /* Home page background in dark mode */
-html[data-theme="dark"] .page-home {
+html.dark .page-home {
   background: var(--cream);
 }
 
 /* Placeholder tile backgrounds */
-html[data-theme="dark"] .project__cover,
-html[data-theme="dark"] .gallery__item,
-html[data-theme="dark"] .about__photo {
+html.dark .project__cover,
+html.dark .gallery__item,
+html.dark .about__photo {
   background: #1e1c1a;
 }
 
 /* Mobile nav overlay */
-html[data-theme="dark"] .nav__mobile {
+html.dark .nav__mobile {
   background: var(--cream);
 }
 
