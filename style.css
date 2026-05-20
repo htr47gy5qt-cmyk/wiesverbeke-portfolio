@@ -49,17 +49,8 @@ ul  { list-style: none; }
   align-items: center;
   justify-content: space-between;
   padding: 0 clamp(1.5rem, 5vw, 4rem);
-  background: rgba(245, 242, 238, 0.72);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border-bottom: 1px solid rgba(184, 157, 114, 0.15);
-}
-
-.page-home .nav {
   background: transparent;
-  border-bottom-color: transparent;
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
+  border-bottom: none;
 }
 
 .nav__logo {
@@ -111,13 +102,6 @@ ul  { list-style: none; }
   min-height: 100svh;
 }
 
-/* No frosted glass on home — plain white nav */
-.page-home .nav {
-  background: #fff;
-  border-bottom-color: transparent;
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
-}
 
 .home-stage {
   flex: 1;
@@ -655,6 +639,61 @@ ul  { list-style: none; }
   .nav__links { gap: 1.5rem; }
 }
 
+/* ══════════════════════════════════════
+   THEME TOGGLE BUTTON
+══════════════════════════════════════ */
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: none;
+  background: var(--ink);
+  color: var(--cream);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background var(--t) var(--ease), color var(--t) var(--ease),
+              transform 0.15s var(--ease);
+}
+.theme-toggle:hover  { transform: scale(1.1); }
+.theme-toggle:active { transform: scale(0.95); }
+
+/* ══════════════════════════════════════
+   DARK MODE
+   Variables cascade automatically to
+   every element that uses var(--cream),
+   var(--ink), var(--ink-light).
+   Only hardcoded rgba values need explicit
+   overrides below.
+══════════════════════════════════════ */
+html[data-theme="dark"] {
+  --cream:     #131210;
+  --ink:       #e8e3da;
+  --ink-light: #908878;
+}
+
+/* Home page background in dark mode */
+html[data-theme="dark"] .page-home {
+  background: var(--cream);
+}
+
+/* Placeholder tile backgrounds */
+html[data-theme="dark"] .project__cover,
+html[data-theme="dark"] .gallery__item,
+html[data-theme="dark"] .about__photo {
+  background: #1e1c1a;
+}
+
+/* Mobile nav overlay */
+html[data-theme="dark"] .nav__mobile {
+  background: var(--cream);
+}
+
+/* ══════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════ */
 @media (max-width: 480px) {
   /* Hide the inline nav links — they're replaced by a hamburger menu */
   .nav__links { display: none; }
@@ -664,6 +703,9 @@ ul  { list-style: none; }
 
   /* Show the hamburger button only on small screens */
   .nav__toggle { display: flex; }
+
+  /* Group toggle + hamburger to the right side on mobile */
+  .theme-toggle { margin-left: auto; margin-right: 0.5rem; }
 
   /* When the menu is open, swap the icon to an "X" */
   body.nav-open .nav__toggle-bar:nth-child(1) {
@@ -684,10 +726,6 @@ ul  { list-style: none; }
   /* Lift the nav bar above the overlay so the hamburger X stays tappable */
   body.nav-open .nav {
     z-index: 9200;
-    background: transparent;
-    border-bottom-color: transparent;
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
   }
   body.nav-open { overflow: hidden; }
 }
