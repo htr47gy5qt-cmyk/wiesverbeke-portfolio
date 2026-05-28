@@ -27,7 +27,5 @@ __pycache__/
 *.pyc
 *.pyo
 
-# Photos hosted on object storage, not in Git
-photos/
 .DS_Store
 photos-unused/

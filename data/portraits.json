@@ -10,43 +10,53 @@
       "date": "2025",
       "filmstock": "",
       "alt": "Portrait of friend smoking a cigarette.",
-      "width": 2400,
-      "height": 1600
+      "width": 2080,
+      "height": 1524
     },
     {
       "src": "photos/Fuji_c200_iron-man_19.webp",
       "location": "Belgium, Aarschot",
       "date": "2025",
       "filmstock": "Fujifilm C200",
-      "alt": "Portrait of friend riding a motorbike."
+      "alt": "Portrait of friend riding a motorbike.",
+      "width": 2298,
+      "height": 1554
     },
     {
       "src": "photos/Kodak-Gold-200_K-en-W_14.webp",
       "location": "Belgium, Luik",
       "date": "2024",
       "filmstock": "Kodak Gold 200",
-      "alt": "Portrait of two friends posing with car doors."
+      "alt": "Portrait of two friends posing with car doors.",
+      "width": 2298,
+      "height": 1568
     },
     {
       "src": "photos/FR24_14.webp",
       "location": "South of France",
       "date": "2024",
       "filmstock": "Harmann Phoenix I 200",
-      "alt": "Portrait of two friends posing with each other."
+      "alt": "Portrait of two friends posing with each other.",
+      "width": 2400,
+      "height": 1659
     },
     {
       "src": "photos/IMG_7904.webp",
       "location": "Germany, Berlin",
       "date": "2023",
       "filmstock": "Ilford HP5 Plus 400",
-      "alt": "Portrait of friend in Berlin."
+      "alt": "Portrait of friend in Berlin.",
+      "width": 2254,
+      "height": 1501
     },
     {
       "src": "photos/1758190492-61513300.webp",
       "location": "China, Chongqing",
       "date": "2025",
       "filmstock": "",
-      "alt": "Portrait of friend in Chongqing."
+      "alt": "Portrait of friend in Chongqing.",
+      "width": 2299,
+      "height": 1525
     }
   ]
 }

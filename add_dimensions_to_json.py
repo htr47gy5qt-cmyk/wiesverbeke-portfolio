@@ -15,6 +15,7 @@ Uses Pillow (PIL). Install with:
 import json
 import os
 import sys
+import argparse
 from urllib.parse import unquote
 
 try:
@@ -42,7 +43,7 @@ def measure(path):
         return None, None
 
 
-def process_json(json_path):
+def process_json(json_path, force=False):
     with open(json_path, "r", encoding="utf-8") as f:
         data = json.load(f)
 
@@ -51,8 +52,8 @@ def process_json(json_path):
     skipped = 0
 
     for photo in data.get("photos", []):
-        # Skip if already has dimensions and the file hasn't changed (best effort)
-        if photo.get("width") and photo.get("height"):
+        # Skip if already has dimensions (unless --force)
+        if not force and photo.get("width") and photo.get("height"):
             skipped += 1
             continue
 
@@ -76,6 +77,11 @@ def process_json(json_path):
 
 
 def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--force", action="store_true",
+                        help="Re-read dimensions even if they already exist in JSON")
+    args = parser.parse_args()
+
     if not os.path.isdir(DATA_DIR):
         print(f"❌  No '{DATA_DIR}' folder. Run from project root.")
         sys.exit(1)
@@ -89,7 +95,7 @@ def main():
             continue
         path = os.path.join(DATA_DIR, name)
         print(f"Processing {path} …")
-        updated, missing, skipped = process_json(path)
+        updated, missing, skipped = process_json(path, force=args.force)
         print(f"  ✓ updated: {updated}   skipped: {skipped}   missing: {missing}")
         total_updated += updated
 
