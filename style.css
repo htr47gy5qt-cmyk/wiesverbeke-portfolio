@@ -736,3 +736,21 @@ html.dark .nav__mobile {
   }
   body.nav-open { overflow: hidden; }
 }
+
+/* ══════════════════════════════════════
+   SCROLLING NAV — project + work pages
+   Nav is not sticky; it scrolls away with the page.
+══════════════════════════════════════ */
+.page-project .nav,
+.page-work .nav {
+  position: static;
+}
+
+/* Remove the top-padding offset that only existed to clear the fixed nav */
+.page-project .page-header {
+  padding-top: 3.5rem;
+}
+
+.page-work .projects {
+  padding-top: 5rem;
+}
