@@ -5,51 +5,6 @@
   "cover": "photos/50y-Jubileum-34_copy.webp",
   "photos": [
     {
-      "src": "photos/50y_Jubileum_34.webp",
-      "location": "Belgium, Leuven",
-      "date": "2025",
-      "filmstock": "Fuji c200",
-      "alt": "Street photography",
-      "width": 2121,
-      "height": 3281
-    },
-    {
-      "src": "photos/28042026_02_fuji400_68.webp",
-      "location": "China, Shenzhen",
-      "date": "2026",
-      "filmstock": "Fujifilm c400",
-      "alt": "Street photography",
-      "width": 2298,
-      "height": 1577
-    },
-    {
-      "src": "photos/28042026_02_fuji400_72.webp",
-      "location": "China, Shenzhen",
-      "date": "2026",
-      "filmstock": "Fujifilm c400",
-      "alt": "Street photography",
-      "width": 2298,
-      "height": 1548
-    },
-    {
-      "src": "photos/000292660029.webp",
-      "location": "Belgium, Leuven, Muntstraat Dulci",
-      "date": "2026",
-      "filmstock": "Fuji c200",
-      "alt": "Street photography",
-      "width": 2299,
-      "height": 1524
-    },
-    {
-      "src": "photos/1758190360-13521400.webp",
-      "location": "China, Chengdu",
-      "date": "2025",
-      "filmstock": "",
-      "alt": "Street photography",
-      "width": 2296,
-      "height": 1660
-    },
-    {
       "src": "photos/1758190416-43194600_edited.webp",
       "location": "South Korea, Busan",
       "date": "2025",
@@ -57,24 +12,6 @@
       "alt": "Street photography",
       "width": 2295,
       "height": 1646
-    },
-    {
-      "src": "photos/1758190457-61345300-2.webp",
-      "location": "China, Chongqing",
-      "date": "2025",
-      "filmstock": "",
-      "alt": "Street photography",
-      "width": 2300,
-      "height": 1525
-    },
-    {
-      "src": "photos/1758190494-55840000.webp",
-      "location": "China, Chongqing",
-      "date": "2025",
-      "filmstock": "",
-      "alt": "Street photography",
-      "width": 2300,
-      "height": 1525
     },
     {
       "src": "photos/ardennen_Zef-6.webp",
@@ -86,15 +23,6 @@
       "height": 1594
     },
     {
-      "src": "photos/FP4%2BOM4-T_1ste_om4_rol_1.webp",
-      "location": "Belgium, Leuven, Martelarenplein",
-      "date": "2024",
-      "filmstock": "Ilford FP4+",
-      "alt": "Street photography",
-      "width": 2298,
-      "height": 1545
-    },
-    {
       "src": "photos/KodakUM400_Seoul_Yuzies36.webp",
       "location": "South Korea, Seoul",
       "date": "2025",
@@ -104,42 +32,6 @@
       "height": 2299
     },
     {
-      "src": "photos/KodakPortra400Seoul_40.webp",
-      "location": "South Korea, Seoul",
-      "date": "2025",
-      "filmstock": "Kodak Portra 400",
-      "alt": "Street photography",
-      "width": 2298,
-      "height": 1584
-    },
-    {
-      "src": "photos/10052026_03_KodakEastXX_45.webp",
-      "location": "South Korea, Busan",
-      "date": "2025",
-      "filmstock": "Kodak Eastman Double-X",
-      "alt": "Street photography",
-      "width": 2298,
-      "height": 1545
-    },
-    {
-      "src": "photos/10052026_03_KodakEastXX_58.webp",
-      "location": "South Korea, Busan",
-      "date": "2025",
-      "filmstock": "Kodak Eastman Double-X",
-      "alt": "Street photography",
-      "width": 2296,
-      "height": 1607
-    },
-    {
-      "src": "photos/28042026_04_Lomo800_10.webp",
-      "location": "Belgium, Leuven",
-      "date": "2026",
-      "filmstock": "Lomography 800",
-      "alt": "Street photography",
-      "width": 2298,
-      "height": 1553
-    },
-    {
       "src": "photos/1758190451-74825800-2.webp",
       "location": "China, Chongqing, train to Wulong",
       "date": "2025",
@@ -147,6 +39,15 @@
       "alt": "Street photography",
       "width": 2048,
       "height": 1425
+    },
+    {
+      "src": "photos/000292660029.webp",
+      "location": "Belgium, Leuven, Muntstraat Dulci",
+      "date": "2026",
+      "filmstock": "Fuji c200",
+      "alt": "Street photography",
+      "width": 2299,
+      "height": 1524
     }
   ]
 }

@@ -5,24 +5,6 @@
   "cover": "photos/1758190450-25276400-2_copy.webp",
   "photos": [
     {
-      "src": "photos/28042026_01_cine800_59.webp",
-      "location": "Belgium, Ghent-Bruges",
-      "date": "2025",
-      "filmstock": "Cinestill 800T",
-      "alt": "Landscape",
-      "width": 2298,
-      "height": 1574
-    },
-    {
-      "src": "photos/1758190373-74445700.webp",
-      "location": "China, Chongqing",
-      "date": "2025",
-      "filmstock": "",
-      "alt": "Landscape",
-      "width": 2299,
-      "height": 1524
-    },
-    {
       "src": "photos/1758190419-55782500-4.webp",
       "location": "South Korea, Busan",
       "date": "2025",
@@ -41,15 +23,6 @@
       "height": 1645
     },
     {
-      "src": "photos/FR24_1.webp",
-      "location": "South of France",
-      "date": "2024",
-      "filmstock": "Harmann Phoenix II 200",
-      "alt": "Landscape",
-      "width": 2195,
-      "height": 1556
-    },
-    {
       "src": "photos/FR24_24.webp",
       "location": "South of France",
       "date": "2024",
@@ -57,42 +30,6 @@
       "alt": "Landscape",
       "width": 2298,
       "height": 1568
-    },
-    {
-      "src": "photos/FR24_62.webp",
-      "location": "South of France",
-      "date": "2024",
-      "filmstock": "Fuji C200",
-      "alt": "Landscape",
-      "width": 2297,
-      "height": 1573
-    },
-    {
-      "src": "photos/IMG_5948.webp",
-      "location": "Belgium, Meerhout",
-      "date": "2025",
-      "filmstock": "Harmann Phoenix II 200",
-      "alt": "Landscape",
-      "width": 1566,
-      "height": 2299
-    },
-    {
-      "src": "photos/Portra_Batman_24.webp",
-      "location": "Belgium, Tremelo, Ninde",
-      "date": "2024",
-      "filmstock": "Portra 400",
-      "alt": "Landscape",
-      "width": 2298,
-      "height": 1577
-    },
-    {
-      "src": "photos/ardennen_Zef-16.webp",
-      "location": "Belgium, Ardennes, Bouillon-Rochehaut",
-      "date": "2024",
-      "filmstock": "Kodak P3200",
-      "alt": "Landscape",
-      "width": 2298,
-      "height": 1561
     },
     {
       "src": "photos/10052026_01_KodakTx400_19.webp",
@@ -104,15 +41,6 @@
       "height": 1550
     },
     {
-      "src": "photos/10052026_03_KodakEastXX_83.webp",
-      "location": "South Korea, Seoul",
-      "date": "2025",
-      "filmstock": "Kodak Eastman XX",
-      "alt": "Landscape",
-      "width": 2296,
-      "height": 1622
-    },
-    {
       "src": "photos/P17_Roadtrip ZF_2_40.webp",
       "location": "South of France",
       "date": "2025",
@@ -122,31 +50,13 @@
       "height": 1463
     },
     {
-      "src": "photos/P17_Roadtrip_ZF_29.webp",
-      "location": "South of France",
-      "date": "2025",
-      "filmstock": "Fuji c200",
-      "alt": "Landscape",
-      "width": 1599,
-      "height": 2297
-    },
-    {
-      "src": "photos/IMG_7516.webp",
-      "location": "Hong Kong, Fo Tan",
+      "src": "photos/shanghai_005.webp",
+      "location": "China, Shanghai",
       "date": "2026",
-      "filmstock": "Cinestill 800T",
+      "filmstock": "Lucky Film 200",
       "alt": "Landscape",
-      "width": 2400,
-      "height": 1523
-    },
-    {
-      "src": "photos/Documenting_life_fuji_C200_35.webp",
-      "location": "Belgium, Leuven, Mincklers parking",
-      "date": "2025",
-      "filmstock": "Fuji C200",
-      "alt": "Landscape",
-      "width": 2300,
-      "height": 1536
+      "width": 2358,
+      "height": 2400
     }
   ]
 }
