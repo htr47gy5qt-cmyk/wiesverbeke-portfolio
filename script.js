@@ -115,6 +115,169 @@
     });
   }
 
+  /* ── FILM-STRIP SCROLLING ──
+   * Makes the horizontal gallery usable with a mouse:
+   *  - vertical mouse-wheel scrolls the strip sideways
+   *  - click-and-drag pans the strip (touch already works natively)
+   *  - a drag is not treated as a click, so it won't open the lightbox
+   */
+  function initStrip() {
+    const grid = document.getElementById("gallery-grid");
+    if (!grid) return;
+
+    // Mouse-wheel → horizontal scroll. Crucially, we ONLY hijack a
+    // vertical-dominant wheel (a real mouse). Any horizontal intent — a
+    // trackpad two-finger swipe or shift+wheel — is left to the browser's
+    // smooth native scroll; intercepting it fights that scroll and stutters.
+    grid.addEventListener("wheel", function (e) {
+      if (grid.scrollWidth <= grid.clientWidth) return;
+      if (Math.abs(e.deltaX) >= Math.abs(e.deltaY)) return; // horizontal → native
+      e.preventDefault();
+      grid.scrollLeft += e.deltaY;
+    }, { passive: false });
+
+    // Flag the strip as "scrolling" so CSS can drop the hover zoom while it
+    // moves (and for a beat after), then restore it once things settle.
+    let scrollStopTimer = null;
+    grid.addEventListener("scroll", function () {
+      grid.classList.add("is-scrolling");
+      clearTimeout(scrollStopTimer);
+      scrollStopTimer = setTimeout(function () {
+        grid.classList.remove("is-scrolling");
+      }, 120);
+    }, { passive: true });
+
+    // Click-and-drag to pan (mouse/trackpad only — touch scrolls natively)
+    let isDown = false, startX = 0, startScroll = 0, moved = false;
+
+    grid.addEventListener("pointerdown", function (e) {
+      if (e.pointerType === "touch") return;
+      isDown = true;
+      moved = false;
+      startX = e.clientX;
+      startScroll = grid.scrollLeft;
+    });
+    window.addEventListener("pointermove", function (e) {
+      if (!isDown) return;
+      const dx = e.clientX - startX;
+      if (Math.abs(dx) > 6) moved = true;
+      grid.scrollLeft = startScroll - dx;
+    });
+    window.addEventListener("pointerup", function () { isDown = false; });
+
+    // Swallow the click that ends a drag, so it doesn't open the lightbox
+    grid.addEventListener("click", function (e) {
+      if (moved) { e.stopPropagation(); e.preventDefault(); moved = false; }
+    }, true);
+
+    /* ── "Swipe →" hint on the right edge ── */
+    const gallery = grid.closest(".gallery") || grid.parentElement;
+    let hint = null;
+    let updateHint = function () {};   // assigned below once the hint exists
+    if (gallery) {
+      gallery.style.position = "relative";
+      hint = document.createElement("div");
+      hint.className = "strip-hint";
+      hint.setAttribute("aria-hidden", "true");
+      hint.innerHTML =
+        '<span class="strip-hint__fade"></span>' +
+        '<span class="strip-hint__label">Swipe <span class="strip-hint__arrow">→</span></span>';
+      gallery.appendChild(hint);
+
+      // Keep the hint aligned to the strip's box (it lives outside the
+      // scroller so it doesn't move with the photos).
+      const positionHint = () => {
+        hint.style.top = grid.offsetTop + "px";
+        hint.style.height = grid.offsetHeight + "px";
+      };
+      positionHint();
+      window.addEventListener("resize", positionHint);
+
+      // Hide it once there's nothing to scroll, or as soon as the user moves.
+      updateHint = () => {
+        const atEnd = grid.scrollLeft + grid.clientWidth >= grid.scrollWidth - 5;
+        const cantScroll = grid.scrollWidth <= grid.clientWidth + 5;
+        hint.classList.toggle("is-hidden", cantScroll || grid.scrollLeft > 20 || atEnd);
+      };
+      updateHint();
+      grid.addEventListener("scroll", updateHint, { passive: true });
+    }
+
+    /* ── Arrow-key navigation (only when the lightbox is closed) ──
+     * Glides one photo at a time and lands it centred, using our own
+     * eased animation. (Free scrolling no longer snaps; the arrow keys
+     * still centre the target photo so keyboard nav stays predictable.) */
+    const strips = () => Array.from(grid.querySelectorAll(".gallery__item"));
+
+    // Content-space left offset that would centre item `i` in the strip.
+    function centreLeftFor(i) {
+      const its = strips();
+      i = Math.max(0, Math.min(its.length - 1, i));
+      const gridRect = grid.getBoundingClientRect();
+      const r = its[i].getBoundingClientRect();
+      const itemLeft = grid.scrollLeft + (r.left - gridRect.left);
+      return itemLeft - (grid.clientWidth - r.width) / 2;
+    }
+
+    function centredIndex() {
+      const its = strips();
+      const gridRect = grid.getBoundingClientRect();
+      const centre = grid.scrollLeft + grid.clientWidth / 2;
+      let best = 0, bestDist = Infinity;
+      its.forEach(function (it, i) {
+        const r = it.getBoundingClientRect();
+        const c = grid.scrollLeft + (r.left - gridRect.left) + r.width / 2;
+        const d = Math.abs(c - centre);
+        if (d < bestDist) { bestDist = d; best = i; }
+      });
+      return best;
+    }
+
+    let animId = null;
+    let targetIndex = -1;
+
+    function glideTo(left, duration) {
+      if (animId) cancelAnimationFrame(animId);
+      const maxLeft = grid.scrollWidth - grid.clientWidth;
+      const to = Math.max(0, Math.min(maxLeft, left));
+      const from = grid.scrollLeft;
+      const dist = to - from;
+      if (Math.abs(dist) < 1) return;
+
+      const start = performance.now();
+      const ease = t => 1 - Math.pow(1 - t, 3);     // easeOutCubic
+
+      function frame(now) {
+        const t = Math.min((now - start) / duration, 1);
+        grid.scrollLeft = from + dist * ease(t);
+        updateHint();
+        if (t < 1) {
+          animId = requestAnimationFrame(frame);
+        } else {
+          animId = null;
+        }
+      }
+      animId = requestAnimationFrame(frame);
+    }
+
+    document.addEventListener("keydown", function (e) {
+      if (e.key !== "ArrowLeft" && e.key !== "ArrowRight") return;
+      const lb = document.getElementById("lightbox");
+      if (lb && lb.classList.contains("is-open")) return; // lightbox owns arrows when open
+      e.preventDefault();
+      // Chain off the in-flight target so rapid presses advance smoothly.
+      const base = animId !== null ? targetIndex : centredIndex();
+      targetIndex = Math.max(0, Math.min(strips().length - 1,
+        base + (e.key === "ArrowRight" ? 1 : -1)));
+      glideTo(centreLeftFor(targetIndex), 450);
+    });
+
+    // If the user scrolls by hand, drop any stale arrow-key target.
+    grid.addEventListener("scroll", function () {
+      if (animId === null) targetIndex = -1;
+    }, { passive: true });
+  }
+
   /* ── LIGHTBOX ── */
   function initLightbox() {
     const lb = document.getElementById("lightbox");
@@ -226,8 +389,9 @@
   async function init() {
     // 1. Render first (if we're on a project page), then wire up the rest.
     await renderGallery();
-    // 2. Now the DOM has the figures, so fade-in + lightbox can bind to them.
+    // 2. Now the DOM has the figures, so fade-in + strip + lightbox can bind.
     initFade();
+    initStrip();
     initLightbox();
   }
 

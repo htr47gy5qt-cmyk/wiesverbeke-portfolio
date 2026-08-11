@@ -269,23 +269,42 @@ ul  { list-style: none; }
 }
 
 /* ══════════════════════════════════════
-   MASONRY GALLERY
-   Uses CSS columns — each photo keeps
-   its natural aspect ratio automatically.
+   FILM-STRIP GALLERY
+   Photos sit side by side in a single row
+   at a fixed height; you scroll/swipe
+   sideways through them freely.
+   Widths follow each photo's natural ratio,
+   so nothing is ever cropped.
 ══════════════════════════════════════ */
 .gallery {
-  padding-bottom: clamp(4rem, 8vh, 7rem);
+  padding-bottom: clamp(2rem, 5vh, 4rem);
 }
 
 .gallery__grid {
-  column-count: 3;
-  column-gap: var(--gap);
+  display: flex;
+  align-items: center;
+  gap: var(--gap);
+  height: max(300px, min(82vh, calc(100dvh - 210px)));
   padding: 0 clamp(1.5rem, 5vw, 4rem);
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;   /* momentum scroll on iOS */
+  overscroll-behavior-x: contain;
+  cursor: grab;
 }
+.gallery__grid:active { cursor: grabbing; }
+
+/* Thin, subtle horizontal scrollbar */
+.gallery__grid::-webkit-scrollbar { height: 6px; }
+.gallery__grid::-webkit-scrollbar-thumb {
+  background: var(--ink-light);
+  border-radius: 3px;
+}
+.gallery__grid::-webkit-scrollbar-track { background: transparent; }
 
 .gallery__item {
-  break-inside: avoid;        /* never cut a photo across columns */
-  margin-bottom: var(--gap);
+  flex: 0 0 auto;             /* keep natural width, never shrink */
+  height: 100%;
   overflow: hidden;
   border-radius: var(--radius);
   border: 4px solid var(--photo-border);
@@ -294,10 +313,10 @@ ul  { list-style: none; }
   position: relative;
 }
 
-/* img fills the item naturally — height is auto so ratio is preserved */
+/* img fills the strip height — width follows the photo's natural ratio */
 .gallery__item img {
-  width: 100%;
-  height: auto;
+  height: 100%;
+  width: auto;
   display: block;
   transition: transform 0.7s var(--ease), filter 0.7s var(--ease);
   filter: brightness(0.97);
@@ -306,6 +325,62 @@ ul  { list-style: none; }
 .gallery__item:hover img {
   transform: scale(1.03);
   filter: brightness(1.05);
+}
+
+/* While the strip is actively scrolling, suppress the hover zoom/brightness.
+   The transform + filter repaint fires on every photo that slides under the
+   cursor, which can cause micro-jank; script.js toggles .is-scrolling. */
+.gallery__grid.is-scrolling .gallery__item img {
+  transition: none;
+}
+.gallery__grid.is-scrolling .gallery__item:hover img {
+  transform: none;
+  filter: brightness(0.97);
+}
+
+/* ── "Swipe →" hint on the right edge ──
+   Injected by script.js. Sits over the strip's right edge, fades the
+   photos out into the page background, and gently nudges. It fades away
+   the moment you start scrolling (script.js adds .is-hidden). */
+.strip-hint {
+  position: absolute;
+  right: 0;
+  width: clamp(90px, 14vw, 190px);
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  z-index: 2;
+  transition: opacity 0.6s var(--ease);
+}
+.strip-hint.is-hidden { opacity: 0; }
+
+.strip-hint__fade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, transparent, var(--cream) 85%);
+}
+.strip-hint__label {
+  position: relative;
+  margin-right: clamp(1rem, 3vw, 2rem);
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-family: var(--font-ui);
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-light);
+  animation: strip-nudge 1.8s var(--ease) infinite;
+}
+.strip-hint__arrow { font-size: 1.05em; }
+
+@keyframes strip-nudge {
+  0%, 100% { transform: translateX(0); }
+  50%      { transform: translateX(6px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .strip-hint__label { animation: none; }
 }
 
 /* Fade-in on scroll */
@@ -629,7 +704,7 @@ ul  { list-style: none; }
     gap: 3rem;
   }
   .project__cover { aspect-ratio: 4 / 3; }
-  .gallery__grid  { column-count: 2; }
+  .gallery__grid  { height: max(280px, calc(100dvh - 190px)); }
   .about {
     flex-direction: column;
     align-items: flex-start;
@@ -705,8 +780,11 @@ html.dark .nav__mobile {
   /* Hide the inline nav links — they're replaced by a hamburger menu */
   .nav__links { display: none; }
 
-  /* Single-column gallery on phones */
-  .gallery__grid { column-count: 1; }
+  /* Shorter film-strip on phones (swipe sideways) */
+  .gallery__grid {
+    height: max(260px, calc(100dvh - 165px));
+    gap: 0.5rem;
+  }
 
   /* Show the hamburger button only on small screens */
   .nav__toggle { display: flex; }
