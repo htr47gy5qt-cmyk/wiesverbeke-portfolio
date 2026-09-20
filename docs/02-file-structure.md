@@ -15,7 +15,7 @@ my-portfolio/
 ├── project-portraits.html  ← Empty shell, rendered from data/portraits.json
 │
 ├── style.css               ← Single shared stylesheet for ALL pages
-├── script.js               ← Film-strip gallery + lightbox + fade-in (project pages)
+├── script.js               ← Vertical gallery + captions + lightbox + fade-in
 ├── nav.js                  ← Tiny script: mobile hamburger toggle (every page)
 ├── theme-toggle.js         ← Curtain dark/light mode toggle
 │

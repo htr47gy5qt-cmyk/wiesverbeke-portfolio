@@ -69,7 +69,7 @@ my-portfolio/
 ├── project-portraits.html        ← JSON-rendered gallery
 │
 ├── style.css                     ← shared stylesheet
-├── script.js                     ← gallery render + film-strip + lightbox + fade
+├── script.js                     ← gallery render + captions + lightbox + fade
 ├── nav.js                        ← hamburger toggle
 ├── theme-toggle.js               ← curtain dark/light mode toggle
 │

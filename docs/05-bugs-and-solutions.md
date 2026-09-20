@@ -160,6 +160,29 @@ Also bail out if the mobile menu is currently open (`document.body.classList.con
 
 ---
 
+## 🔴 BUG-12 — Safari: lazy-loaded photos never faded in
+
+**Symptom**: on Safari, gallery photos stayed invisible — the fade-in never fired,
+so the page looked empty below the first photo.
+
+**Root cause**: the scroll fade used an IntersectionObserver watching the `<img>`
+elements. A `loading="lazy"` image that hasn't loaded yet has no intrinsic size in
+Safari, so its box is 0×0 and it can never intersect the viewport. No intersection,
+no `.is-visible`, no fade — the photo stayed at `opacity: 0` forever.
+
+**Fix (two parts)**:
+1. Commit `11f8c32` dropped the observer threshold to `0` so a zero-height box can
+   still trigger.
+2. The vertical gallery goes further: the observer now watches the `.gallery__item`
+   figure rather than the image. A figure always has a real box (it reserves the
+   photo's aspect ratio from the `width`/`height` attributes, plus the caption), so
+   it intersects reliably whether or not the image has loaded.
+
+**Rule**: if you ever point the fade observer back at the images, lazy loading must
+go. Watch a container that has a size of its own.
+
+---
+
 ## 🟡 Quirk — Favicon doesn't show locally
 
 Not a bug, but a recurring confusion: the favicon never appears when opening via `file://` because the paths use `/favicon.ico` (root-relative). On `localhost:8000` and on the live site it works fine. Don't waste time debugging this locally.

@@ -156,7 +156,7 @@ Everything we've built, in the order it happened. Useful for understanding *why*
 - Fixed the placeholder OG image on `project-portraits.html`.
 - Replaced the bulky base64-embedded `favicon.svg` with a lighter version.
 
-## Stage 18 — Film-strip galleries (current)
+## Stage 18 — Film-strip galleries
 
 **Goal**: show photos at their true proportions instead of cropping them into a masonry grid.
 
@@ -166,6 +166,25 @@ Everything we've built, in the order it happened. Useful for understanding *why*
 - Added a right-edge "Swipe →" hint.
 - Hover zoom is suppressed while scrolling to avoid jank.
 - Lives in `script.js` + `style.css` (commit `aae71b5`).
+
+## Stage 19 — Vertical galleries (current)
+
+**Goal**: drop the horizontal strip. Sideways scrolling is not a gesture people
+expect on a web page — it needed a "Swipe →" hint and a wheel hijack to be usable
+at all.
+
+- Galleries are now a plain vertical column: **one photo per row**, centred, at its
+  true aspect ratio, capped to `min(80vh, 900px)` tall. Nothing is cropped.
+- Each photo carries a **caption** beneath it — location · date · film stock, empty
+  fields skipped. Metadata used to be visible only inside the lightbox.
+- New markup: `figure.gallery__item` › `div.gallery__frame` (the bordered box, and
+  the lightbox click target) + `figcaption.gallery__caption`. The border hugs the
+  photo; the caption sits outside it.
+- Removed with the strip: the wheel-to-horizontal hijack, click-and-drag panning,
+  arrow-key glide-and-centre, the `.is-scrolling` hover suppression, and the
+  "Swipe →" hint (`initStrip()` is gone entirely — script.js dropped 404 → 272 lines).
+- Photos after the first now use `loading="lazy"`. Safe because the fade observer
+  watches the figure, not the image — see BUG-12.
 
 ## Open / not done
 
