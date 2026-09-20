@@ -29,7 +29,7 @@ total_bytes=0
 oversized_bytes=0
 
 shopt -s nullglob nocaseglob
-for file in "$PHOTOS_DIR"/*.jpg "$PHOTOS_DIR"/*.jpeg "$PHOTOS_DIR"/*.png; do
+for file in "$PHOTOS_DIR"/*.webp "$PHOTOS_DIR"/*.jpg "$PHOTOS_DIR"/*.jpeg "$PHOTOS_DIR"/*.png; do
   shopt -u nocaseglob
   [ -f "$file" ] || continue
 
