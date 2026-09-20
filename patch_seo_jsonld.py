@@ -25,7 +25,7 @@ PERSON = {
     "name": "Wies Verbeke",
     "jobTitle": "Film Photographer",
     "url": SITE_URL,
-    "image": f"{SITE_URL}/photos/Trasher-cat-with-sunglasses.jpg",
+    "image": f"{SITE_URL}/photos/Trasher-cat-with-sunglasses.webp",
     "email": "wiesverbeke-photo@proton.me",
     "sameAs": [
         "https://www.instagram.com/wiesverbeke/",
@@ -41,6 +41,7 @@ PAGES_PERSON = [
     "project-hongkong.html",
     "project-landscapes.html",
     "project-portraits.html",
+    "project-shanghai.html",
 ]
 
 PROJECT_PAGES = {
@@ -63,6 +64,11 @@ PROJECT_PAGES = {
         "name": "Portraits",
         "description": "Film portraits by Wies Verbeke. Series IV.",
         "path": "/project-portraits.html",
+    },
+    "project-shanghai.html": {
+        "name": "Shanghai on Film",
+        "description": "Shanghai photographed on film by Wies Verbeke. Series V.",
+        "path": "/project-shanghai.html",
     },
 }
 
