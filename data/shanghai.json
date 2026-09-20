@@ -5,47 +5,11 @@
   "cover": "photos/shanghai_005_copy.webp",
   "photos": [
     {
-      "src": "photos/000040760009.webp",
+      "src": "photos/000035460027.webp",
       "location": "China, Shanghai",
       "date": "2026",
-      "filmstock": "Cinestill 400D",
-      "alt": "Woman at the Bund at dusk, Pearl Tower across the river",
-      "width": 2309,
-      "height": 2323
-    },
-    {
-      "src": "photos/000035320008.webp",
-      "location": "China, Shanghai",
-      "date": "2026",
-      "filmstock": "",
-      "alt": "Dumpling kitchen seen through steamed-up glass",
-      "width": 2362,
-      "height": 1567
-    },
-    {
-      "src": "photos/000040820023.webp",
-      "location": "China, Shanghai",
-      "date": "2026",
-      "filmstock": "Kodak Tri-X 400",
-      "alt": "Commuters and parked scooters under an overpass",
-      "width": 2288,
-      "height": 1567
-    },
-    {
-      "src": "photos/000037600020.webp",
-      "location": "China, Shanghai",
-      "date": "2026",
-      "filmstock": "Kodak Ektachrome 100",
-      "alt": "Man in a work shirt in a lane of covered scooters",
-      "width": 2361,
-      "height": 1566
-    },
-    {
-      "src": "photos/000037520016.webp",
-      "location": "China, Shanghai",
-      "date": "2026",
-      "filmstock": "Fuji Superia 400",
-      "alt": "Night performers in red and silver on the riverfront",
+      "filmstock": "Ilford XP2 400",
+      "alt": "Two kittens behind a curtain",
       "width": 2362,
       "height": 1567
     },
@@ -59,13 +23,13 @@
       "height": 1567
     },
     {
-      "src": "photos/shanghai_006.webp",
+      "src": "photos/000040760009.webp",
       "location": "China, Shanghai",
       "date": "2026",
-      "filmstock": "Lucky Film 200",
-      "alt": "Woman resting on a bed with flowers",
-      "width": 2300,
-      "height": 2352
+      "filmstock": "Cinestill 400D",
+      "alt": "Woman at the Bund at dusk, Pearl Tower across the river",
+      "width": 2309,
+      "height": 2323
     },
     {
       "src": "photos/000040800003.webp",
@@ -77,13 +41,49 @@
       "height": 2351
     },
     {
-      "src": "photos/000035460027.webp",
+      "src": "photos/000037520016.webp",
       "location": "China, Shanghai",
       "date": "2026",
-      "filmstock": "Ilford XP2 400",
-      "alt": "Two kittens behind a curtain",
+      "filmstock": "Fuji Superia 400",
+      "alt": "Night performers in red and silver on the riverfront",
       "width": 2362,
       "height": 1567
+    },
+    {
+      "src": "photos/shanghai_006.webp",
+      "location": "China, Shanghai",
+      "date": "2026",
+      "filmstock": "Lucky Film 200",
+      "alt": "Woman resting on a bed with flowers",
+      "width": 2300,
+      "height": 2352
+    },
+    {
+      "src": "photos/000040820023.webp",
+      "location": "China, Shanghai",
+      "date": "2026",
+      "filmstock": "Kodak Tri-X 400",
+      "alt": "Commuters and parked scooters under an overpass",
+      "width": 2288,
+      "height": 1567
+    },
+    {
+      "src": "photos/000035320008.webp",
+      "location": "China, Shanghai",
+      "date": "2026",
+      "filmstock": "",
+      "alt": "Dumpling kitchen seen through steamed-up glass",
+      "width": 2362,
+      "height": 1567
+    },
+    {
+      "src": "photos/000037600020.webp",
+      "location": "China, Shanghai",
+      "date": "2026",
+      "filmstock": "Kodak Ektachrome 100",
+      "alt": "Man in a work shirt in a lane of covered scooters",
+      "width": 2361,
+      "height": 1566
     }
   ]
 }
