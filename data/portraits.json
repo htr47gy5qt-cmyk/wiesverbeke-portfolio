@@ -57,6 +57,24 @@
       "alt": "Portrait of friend in Chongqing.",
       "width": 2299,
       "height": 1525
+    },
+    {
+      "src": "photos/000035330017.webp",
+      "location": "Belgium, Meerhout",
+      "date": "2026",
+      "filmstock": "Ilford XP2 400",
+      "alt": "Portrait of friend reclining in an armchair with crisps.",
+      "width": 2362,
+      "height": 1567
+    },
+    {
+      "src": "photos/000035330025.webp",
+      "location": "Belgium, Meerhout",
+      "date": "2026",
+      "filmstock": "Ilford XP2 400",
+      "alt": "Portrait of friend dancing in a kitchen.",
+      "width": 2362,
+      "height": 1567
     }
   ]
 }
