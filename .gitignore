@@ -29,3 +29,6 @@ __pycache__/
 
 .DS_Store
 photos-unused/
+
+# Full-resolution source photos (backups, never served)
+photos/originals/
