@@ -14,10 +14,10 @@
 
 ### Site
 
-- [ ] **Redirect `.html` → clean URL** (optional) — nginx 301 from `/about.html` to `/about`. Both currently work. See `07-deployment.md`.
 
 ### Done — no longer open
 
+- ~~Redirect `.html` → clean URL~~ — **done.** nginx 301s in Coolify's Custom Nginx Configuration. See `07-deployment.md`.
 - ~~Cache-control headers~~ — **done.** Set in Coolify's Custom Nginx Configuration. See `07-deployment.md`.
 - ~~Custom 404 page~~ — **done.** `404.html` + `error_page` in nginx. See `07-deployment.md`.
 - ~~`.html` in the address bar~~ — **done.** Links, canonicals and sitemap use clean URLs.

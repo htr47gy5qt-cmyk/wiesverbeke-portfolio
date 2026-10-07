@@ -90,7 +90,17 @@ Photos are cached for 30 days (see Caching above). A hard refresh usually fixes 
 
 The server already serves `/about` from `about.html`, and `/about.html` still works too. Since 2026-10-07 all internal links, canonical tags, `og:url`, JSON-LD and `sitemap.xml` use the extensionless form, so the address bar shows `/about`.
 
-**Not done (optional):** a 301 redirect from `/about.html` → `/about` in nginx. Without it both addresses load the same page. If added, test carefully for redirect loops.
+**Redirect done (2026-10-07).** nginx 301-redirects `/about.html` → `/about`, `/index.html` → `/`, and keeps any `?query`. Old links and Google results therefore land on the clean address in one hop. Verified with `curl -sI`.
+
+The redirect lives in the same Custom Nginx Configuration box as the caching rules, inside `server { }`:
+
+```nginx
+absolute_redirect off;          # REQUIRED: without it Location is http://… (nginx sits behind a proxy), causing an extra hop
+if ($request_uri ~ ^/index\.html(\?.*)?$) { return 301 /$1; }
+if ($request_uri ~ ^/(.+)\.html(\?.*)?$)   { return 301 /$1$2; }
+```
+
+No loop: the internal `try_files $uri.html` step does not change `$request_uri`. Browsers cache 301s hard, so if this is ever changed, test with `curl`, not the browser.
 
 ## History
 

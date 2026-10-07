@@ -192,6 +192,7 @@ at all.
 - Removed `.html` from every link, canonical, `og:url`, JSON-LD `url` and `sitemap.xml` entry. The three patchers were updated to match so re-running them keeps clean URLs.
 - Added `serve.py`, a local dev server that resolves `/about` → `about.html` and shows `404.html`. Use it instead of `python3 -m http.server`.
 
+- Added nginx 301 redirects from `*.html` to the clean URL (with `absolute_redirect off;` so they stay on https).
 - Deleted the inert `_headers` file.
 - Added cache-control headers via Coolify's Custom Nginx Configuration (fonts 1 year, photos 30 days, CSS/JS 1 day, pages/JSON no-cache). Verified live with `curl -I`.
 
