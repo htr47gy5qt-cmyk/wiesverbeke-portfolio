@@ -41,29 +41,50 @@ Two options:
 1. **Coolify** keeps a deployment history — redeploy a previous one from its dashboard.
 2. **Git** — `git revert <hash>` then push. This is the safer one, because it keeps the repo and the live site in agreement. Coolify always deploys the latest commit, so a dashboard-only rollback will be undone by the next push.
 
-## Caching — currently unconfigured
+## Caching
 
-The `_headers` file in project root is a **Netlify-era leftover**. nginx does not read it, so its rules have no effect. Live responses carry `etag` and `last-modified` (so browsers revalidate) but **no `cache-control`**, which means photos are revalidated on every visit rather than cached hard.
+**Done (2026-10-07).** Set in Coolify → application → General → **Custom Nginx Configuration**. That box was empty before (Coolify's built-in default was in use), so the config there is Coolify's generated default plus a `map` block and one `add_header Cache-Control $cache_control always;` line:
 
-If this ever matters for performance, the fix is in the nginx config on the VPS (or Coolify's per-service headers), not in `_headers`:
+| Files | `Cache-Control` |
+|---|---|
+| `.woff2` fonts | `public, max-age=31536000, immutable` (1 year) |
+| `.webp .jpg .jpeg .png .svg .ico` | `public, max-age=2592000` (30 days) |
+| `.css .js` | `public, max-age=86400, must-revalidate` (1 day) |
+| everything else (pages, JSON, sitemap) | `no-cache` (re-check every time; cheap 304) |
 
 ```nginx
-location ~* \.(webp|jpg|png|woff2)$ { add_header Cache-Control "public, max-age=31536000, immutable"; }
-location ~* \.html$              { add_header Cache-Control "no-cache"; }
+map $uri $cache_control {
+    default                                    "no-cache";
+    ~*\.woff2$                                 "public, max-age=31536000, immutable";
+    ~*\.(webp|jpg|jpeg|png|svg|ico)$           "public, max-age=2592000";
+    ~*\.(css|js)$                              "public, max-age=86400, must-revalidate";
+}
+
+server {
+    add_header Cache-Control $cache_control always;
+    # ...then Coolify's default: location /, error_page 404 /404.html, error_page 50x
+}
 ```
 
-`_headers` is kept in the repo for now as documentation of the intended policy. It is harmless but inert.
+**Gotchas**
+- Pasting a config in this box **replaces** Coolify's default entirely. Always start from "Generate Default Nginx Configuration" (it asks you to type the app name to confirm) and add to it.
+- Rollback: empty the box, Save, Redeploy → back to Coolify's default.
+- Verify with `curl -sI https://wiesverbeke.com/<path> | grep -i cache-control`.
+- Photos cache for 30 days, so a replaced photo with the *same filename* can look stale for visitors. Rename it (`IMG_1234_v2.webp`) and update the JSON.
+- CSS/JS have no version in their filenames, hence only 1 day.
+
+The `_headers` file in the repo is a Netlify leftover that nginx ignores. It is superseded by the config above.
 
 ## Replacing a photo with the same filename
 
-Because there is no long cache today, a hard refresh is normally enough. If a stale photo persists:
+Photos are cached for 30 days (see Caching above). A hard refresh usually fixes a stale photo for you, but other visitors may keep the old one. Most reliable:
 
 1. Bump the filename (`IMG_1234.webp` → `IMG_1234_v2.webp`) and update the JSON. Most reliable.
 2. Hard refresh (Cmd+Shift+R).
 
 ## Custom 404 page
 
-**Done (2026-10-07).** `404.html` sits in project root and nginx points at it with `error_page 404 /404.html;` (set in Coolify). Verified live: `wiesverbeke.com/nonsense` shows the page with a real 404 status. The page uses **root-relative** links (`/style.css`, `/work`) because it is served at whatever URL was missing — relative links would break at e.g. `/foo/bar`. It has `noindex`.
+**Done (2026-10-07).** `404.html` sits in project root. Coolify's default nginx config for static sites already contains `error_page 404 /404.html;`, so no manual nginx change was needed. Verified live: `wiesverbeke.com/nonsense` shows the page with a real 404 status. The page uses **root-relative** links (`/style.css`, `/work`) because it is served at whatever URL was missing — relative links would break at e.g. `/foo/bar`. It has `noindex`.
 
 ## Clean URLs (no `.html`)
 

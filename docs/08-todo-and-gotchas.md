@@ -15,10 +15,10 @@
 ### Site
 
 - [ ] **Redirect `.html` → clean URL** (optional) — nginx 301 from `/about.html` to `/about`. Both currently work. See `07-deployment.md`.
-- [ ] **Cache-control headers** — the live site sends `etag`/`last-modified` but no `cache-control`, so photos revalidate on every visit. `_headers` is inert on nginx. Fix belongs in the nginx/Coolify config. See `07-deployment.md`. Low priority.
 
 ### Done — no longer open
 
+- ~~Cache-control headers~~ — **done.** Set in Coolify's Custom Nginx Configuration. See `07-deployment.md`.
 - ~~Custom 404 page~~ — **done.** `404.html` + `error_page` in nginx. See `07-deployment.md`.
 - ~~`.html` in the address bar~~ — **done.** Links, canonicals and sitemap use clean URLs.
 - ~~`project-portraits.html` (Series IV)~~ — **built.** The page, `data/portraits.json` and the work.html card all exist.
@@ -118,7 +118,7 @@ The repo went webp-only in May 2026. Source JPGs belong in `photos/originals/` (
 
 ### 15. `_headers` does nothing
 
-It is a Netlify-era file. nginx never reads it. Editing it to change caching will appear to work (the file changes, the deploy succeeds) and change nothing. See `07-deployment.md`.
+It is a Netlify-era file. nginx never reads it. Editing it to change caching will appear to work (the file changes, the deploy succeeds) and change nothing. Caching lives in Coolify's Custom Nginx Configuration — see `07-deployment.md`.
 
 ---
 

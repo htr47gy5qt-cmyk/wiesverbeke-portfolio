@@ -186,14 +186,15 @@ at all.
 - Photos after the first now use `loading="lazy"`. Safe because the fade observer
   watches the figure, not the image — see BUG-12.
 
-## Stage — Custom 404 and clean URLs (2026-10-07)
+## Stage — Custom 404, clean URLs and caching (2026-10-07)
 
-- Added `404.html` (About-page layout, root-relative links, `noindex`) and pointed nginx at it.
+- Added `404.html` (About-page layout, root-relative links, `noindex`) (Coolify's default nginx config already serves it for missing paths).
 - Removed `.html` from every link, canonical, `og:url`, JSON-LD `url` and `sitemap.xml` entry. The three patchers were updated to match so re-running them keeps clean URLs.
 - Added `serve.py`, a local dev server that resolves `/about` → `about.html` and shows `404.html`. Use it instead of `python3 -m http.server`.
+
+- Added cache-control headers via Coolify's Custom Nginx Configuration (fonts 1 year, photos 30 days, CSS/JS 1 day, pages/JSON no-cache). Verified live with `curl -I`.
 
 ## Open / not done
 
 - Nine photos across the five galleries still have empty `location` / `date` / `filmstock`. Only the user knows these values — **never invent them**.
 - The about-page portrait is still the placeholder (`photos/Trasher-cat-with-sunglasses.webp`).
-- No cache-control headers configured on nginx (see `07-deployment.md`).

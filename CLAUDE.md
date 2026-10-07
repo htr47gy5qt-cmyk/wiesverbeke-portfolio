@@ -93,7 +93,7 @@ my-portfolio/
 ```
 
 \* `_headers` is a leftover from the Netlify era. nginx does not read it, so it currently
-has no effect on the live site. Caching rules now belong in the nginx config on the VPS.
+has no effect on the live site. Caching rules live in Coolify → General → Custom Nginx Configuration (see `docs/07-deployment.md`).
 
 ## Standard workflows
 
