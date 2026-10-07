@@ -116,9 +116,9 @@ The biggest source of "works locally, broken in production" issues. nginx on Lin
 
 The repo went webp-only in May 2026. Source JPGs belong in `photos/originals/` (gitignored), not in `photos/`. A `.jpg` sitting loose in `photos/` is a mistake waiting to be committed — it will be served but nothing references it.
 
-### 15. `_headers` does nothing
+### 15. There is no `_headers` file — caching lives in Coolify
 
-It is a Netlify-era file. nginx never reads it. Editing it to change caching will appear to work (the file changes, the deploy succeeds) and change nothing. Caching lives in Coolify's Custom Nginx Configuration — see `07-deployment.md`.
+The Netlify-era `_headers` file was deleted (2026-10-07) because nginx never read it. Don't recreate it: it would appear to work and change nothing. Cache rules live in Coolify's Custom Nginx Configuration — see `07-deployment.md`.
 
 ---
 

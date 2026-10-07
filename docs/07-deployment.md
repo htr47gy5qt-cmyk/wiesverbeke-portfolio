@@ -73,7 +73,7 @@ server {
 - Photos cache for 30 days, so a replaced photo with the *same filename* can look stale for visitors. Rename it (`IMG_1234_v2.webp`) and update the JSON.
 - CSS/JS have no version in their filenames, hence only 1 day.
 
-The `_headers` file in the repo is a Netlify leftover that nginx ignores. It is superseded by the config above.
+The old Netlify-era `_headers` file was deleted from the repo on 2026-10-07 (nginx never read it).
 
 ## Replacing a photo with the same filename
 

@@ -89,11 +89,10 @@ my-portfolio/
 ├── *.sh                          ← maintenance scripts (resize, webp, etc.)
 ├── *.py                          ← patchers (mobile nav, SEO, JSON-LD)
 │
-└── (favicon files, sitemap.xml, robots.txt, site.webmanifest, _headers*)
+└── (favicon files, sitemap.xml, robots.txt, site.webmanifest)
 ```
 
-\* `_headers` is a leftover from the Netlify era. nginx does not read it, so it currently
-has no effect on the live site. Caching rules live in Coolify → General → Custom Nginx Configuration (see `docs/07-deployment.md`).
+Caching rules (there is no `_headers` file — that was a Netlify leftover, deleted 2026-10-07) live in Coolify → General → Custom Nginx Configuration (see `docs/07-deployment.md`).
 
 ## Standard workflows
 

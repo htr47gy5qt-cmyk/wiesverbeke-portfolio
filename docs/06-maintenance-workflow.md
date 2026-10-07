@@ -138,7 +138,7 @@ Currently maintained by hand. If we ever automate this, the algorithm is: for ea
 
 ## Clearing the cache / forcing an updated photo to show
 
-If you replace a photo (same filename, new content) and the old one still shows, it is browser caching — note that `_headers` is inert on nginx (see `07-deployment.md`). Solutions in order of preference:
+If you replace a photo (same filename, new content) and the old one still shows, it is browser caching — photos are cached for 30 days (see `07-deployment.md`). Solutions in order of preference:
 
 1. Bump the filename (`IMG_1234.jpg` → `IMG_1234_v2.jpg` and update JSON).
 2. Hard refresh in the browser (Cmd+Shift+R on Mac).

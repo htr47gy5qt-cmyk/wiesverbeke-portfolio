@@ -39,7 +39,6 @@ my-portfolio/
 ├── web-app-manifest-512x512.png
 ├── site.webmanifest
 │
-├── _headers                ← INERT: Netlify-era header rules, nginx ignores them
 ├── robots.txt              ← SEO crawl rules
 ├── sitemap.xml             ← SEO sitemap (regenerate when adding pages)
 │
