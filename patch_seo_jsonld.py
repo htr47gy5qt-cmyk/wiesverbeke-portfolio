@@ -48,27 +48,27 @@ PROJECT_PAGES = {
     "project-street.html": {
         "name": "Street Photography",
         "description": "Street photography on film by Wies Verbeke. Series I.",
-        "path": "/project-street.html",
+        "path": "/project-street",
     },
     "project-hongkong.html": {
         "name": "Hong Kong on Film",
         "description": "Hong Kong photographed on 35mm film by Wies Verbeke. Series II.",
-        "path": "/project-hongkong.html",
+        "path": "/project-hongkong",
     },
     "project-landscapes.html": {
         "name": "Landscapes",
         "description": "Film landscape photography by Wies Verbeke. Series III.",
-        "path": "/project-landscapes.html",
+        "path": "/project-landscapes",
     },
     "project-portraits.html": {
         "name": "Portraits",
         "description": "Film portraits by Wies Verbeke. Series IV.",
-        "path": "/project-portraits.html",
+        "path": "/project-portraits",
     },
     "project-shanghai.html": {
         "name": "Shanghai on Film",
         "description": "Shanghai photographed on film by Wies Verbeke. Series V.",
-        "path": "/project-shanghai.html",
+        "path": "/project-shanghai",
     },
 }
 

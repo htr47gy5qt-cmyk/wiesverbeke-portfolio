@@ -30,9 +30,9 @@ MOBILE_NAV_BLOCK = """
 
   <!-- ── MOBILE FULL-SCREEN MENU ── -->
   <div class="nav__mobile" id="nav-mobile">
-    <a href="work.html">Work</a>
-    <a href="analog.html">Analog</a>
-    <a href="about.html">About</a>
+    <a href="/work">Work</a>
+    <a href="/analog">Analog</a>
+    <a href="/about">About</a>
   </div>
 """
 
