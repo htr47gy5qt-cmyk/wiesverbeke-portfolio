@@ -8,10 +8,10 @@ The everyday tasks. Each workflow assumes you're starting from a fresh terminal 
 
 ```bash
 cd ~/my-portfolio
-python3 -m http.server 8000
+python3 serve.py
 ```
 
-Leave that terminal open. In a browser, visit `http://localhost:8000/<page>.html`.
+Leave that terminal open. In a browser, visit `http://localhost:8000/<page>`.
 
 **Never** open the HTML files via `file://` — the gallery will be empty because `fetch()` is blocked. See BUG-4 in `05-bugs-and-solutions.md`.
 
@@ -49,7 +49,7 @@ To stop the server: focus the terminal, hit `Ctrl+C`.
    ```bash
    python3 add_dimensions_to_json.py
    ```
-6. Test locally: `python3 -m http.server 8000`, visit the project page.
+6. Test locally: `python3 serve.py`, visit the project page.
 7. Deploy (see `07-deployment.md`).
 
 **Gotchas**:
@@ -132,7 +132,7 @@ sed -i '' 's/OLD@EMAIL\.COM/NEW@EMAIL.COM/g' *.html patch_seo_jsonld.py
 
 ## Regenerating sitemap.xml
 
-Currently maintained by hand. If we ever automate this, the algorithm is: for each `*.html` in project root, write a `<url>` entry with `loc=https://wiesverbeke.com/<file>`, `lastmod=$(date +%Y-%m-%d)`.
+Currently maintained by hand. If we ever automate this, the algorithm is: for each `*.html` in project root, write a `<url>` entry with `loc=https://wiesverbeke.com/<file without .html>`, `lastmod=$(date +%Y-%m-%d)`.
 
 ---
 
@@ -149,7 +149,7 @@ If you replace a photo (same filename, new content) and the old one still shows,
 ## Workflow summary card (pin this)
 
 ```
-LOCAL DEV       cd ~/my-portfolio && python3 -m http.server 8000
+LOCAL DEV       cd ~/my-portfolio && python3 serve.py
 ADD PHOTOS      drop into photos/ → ./deploy-photos.sh → edit data/<project>.json
 ADD A PAGE      see "Adding a new HTML page" above
 DEPLOY          git add -A && git commit -m "..." && git push  (Coolify auto-deploys)

@@ -63,7 +63,13 @@ Because there is no long cache today, a hard refresh is normally enough. If a st
 
 ## Custom 404 page
 
-Not implemented — unknown routes get the nginx default. To add one: drop a `404.html` in project root and point nginx at it (`error_page 404 /404.html;`). Unlike Netlify, nginx does **not** pick up `404.html` automatically.
+**Done (2026-10-07).** `404.html` sits in project root and nginx points at it with `error_page 404 /404.html;` (set in Coolify). Verified live: `wiesverbeke.com/nonsense` shows the page with a real 404 status. The page uses **root-relative** links (`/style.css`, `/work`) because it is served at whatever URL was missing — relative links would break at e.g. `/foo/bar`. It has `noindex`.
+
+## Clean URLs (no `.html`)
+
+The server already serves `/about` from `about.html`, and `/about.html` still works too. Since 2026-10-07 all internal links, canonical tags, `og:url`, JSON-LD and `sitemap.xml` use the extensionless form, so the address bar shows `/about`.
+
+**Not done (optional):** a 301 redirect from `/about.html` → `/about` in nginx. Without it both addresses load the same page. If added, test carefully for redirect loops.
 
 ## History
 

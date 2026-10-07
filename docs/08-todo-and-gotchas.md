@@ -2,23 +2,25 @@
 
 ## Open TODOs (things explicitly left undone)
 
-*Last verified against the repo: 2026-09-20.*
+*Last verified against the repo: 2026-10-07.*
 
 ### Content
 
 - [ ] **Fill the remaining empty metadata in `data/*.json`.**
-  Eight photos still have `"location": ""`, `"date": ""` or `"filmstock": ""` — two in each of hongkong, landscapes, portraits and street. Only the user knows the actual values. **Don't invent these — ask.**
-  Current offenders: `IMG_3914`, `IMG_3922` (hongkong); `1758190419-55782500-4`, `1758190448-61499600` (landscapes); `IMG_2816`, `1758190492-61513300` (portraits); `1758190416-43194600_edited`, `1758190451-74825800-2` (street).
+  Nine photos still have `"location": ""`, `"date": ""` or `"filmstock": ""` — two in each of hongkong, landscapes, portraits and street, plus one in shanghai. All nine are missing only `filmstock`. Only the user knows the actual values. **Don't invent these — ask.**
+  Current offenders: `IMG_3914`, `IMG_3922` (hongkong); `1758190419-55782500-4`, `1758190448-61499600` (landscapes); `IMG_2816`, `1758190492-61513300` (portraits); `1758190416-43194600_edited`, `1758190451-74825800-2` (street); `000035320008` (shanghai).
 - [ ] **Replace the about-page portrait.**
   `about.html` line 52 still points at `photos/Trasher-cat-with-sunglasses.webp` — a placeholder. User said they'd swap it in eventually.
 
 ### Site
 
-- [ ] **Custom 404 page** — currently the nginx default. To add: create `404.html` **and** point nginx at it (`error_page 404 /404.html;`). nginx does not pick it up automatically the way Netlify did. Low priority.
+- [ ] **Redirect `.html` → clean URL** (optional) — nginx 301 from `/about.html` to `/about`. Both currently work. See `07-deployment.md`.
 - [ ] **Cache-control headers** — the live site sends `etag`/`last-modified` but no `cache-control`, so photos revalidate on every visit. `_headers` is inert on nginx. Fix belongs in the nginx/Coolify config. See `07-deployment.md`. Low priority.
 
 ### Done — no longer open
 
+- ~~Custom 404 page~~ — **done.** `404.html` + `error_page` in nginx. See `07-deployment.md`.
+- ~~`.html` in the address bar~~ — **done.** Links, canonicals and sitemap use clean URLs.
 - ~~`project-portraits.html` (Series IV)~~ — **built.** The page, `data/portraits.json` and the work.html card all exist.
 - ~~Migrate off Netlify~~ — **done, but not to Cloudflare Pages.** The site now runs on a Hetzner VPS with Coolify. See `07-deployment.md`.
 

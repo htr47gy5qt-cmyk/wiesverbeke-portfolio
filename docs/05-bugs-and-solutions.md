@@ -47,7 +47,7 @@ Every non-trivial bug we've hit, with root cause and fix. **Read this fully** â€
 **Fix / instructions to give**:
 ```bash
 cd ~/my-portfolio
-python3 -m http.server 8000
+python3 serve.py
 # leave THIS terminal open, untouched
 # in a NEW browser tab visit http://localhost:8000/project-street.html
 ```
@@ -62,7 +62,7 @@ If "Address already in use": `lsof -i :8000` to find the rogue process, `kill <P
 
 **Root cause**: Browsers block `fetch()` over `file://` URLs (CORS / same-origin restriction). After the JSON refactor (Stage 7), `script.js` uses `fetch('data/street.json')` to load the gallery, which fails silently on `file://`.
 
-**Fix**: Always run `python3 -m http.server 8000` for local dev. Never test by double-clicking the HTML.
+**Fix**: Always run `python3 serve.py` for local dev. Never test by double-clicking the HTML.
 
 **Documented in**: `README.md`, `06-maintenance-workflow.md`.
 

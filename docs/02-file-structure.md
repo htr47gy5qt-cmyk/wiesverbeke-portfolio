@@ -6,6 +6,7 @@ Everything is rooted at `~/my-portfolio/`. The whole folder is what Coolify depl
 my-portfolio/
 ├── index.html              ← Home: white bg, one centered photo (IMG_3914.jpg)
 ├── work.html               ← Project landing: 4 cards (Street, HK, Landscapes, Portraits)
+├── 404.html                ← Custom not-found page (root-relative links, noindex)
 ├── about.html              ← Bio + portrait (Trasher-cat-with-sunglasses.webp — placeholder)
 ├── analog.html             ← Experimental mouse-trail page (self-contained)
 │

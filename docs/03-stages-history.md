@@ -186,9 +186,14 @@ at all.
 - Photos after the first now use `loading="lazy"`. Safe because the fade observer
   watches the figure, not the image — see BUG-12.
 
+## Stage — Custom 404 and clean URLs (2026-10-07)
+
+- Added `404.html` (About-page layout, root-relative links, `noindex`) and pointed nginx at it.
+- Removed `.html` from every link, canonical, `og:url`, JSON-LD `url` and `sitemap.xml` entry. The three patchers were updated to match so re-running them keeps clean URLs.
+- Added `serve.py`, a local dev server that resolves `/about` → `about.html` and shows `404.html`. Use it instead of `python3 -m http.server`.
+
 ## Open / not done
 
-- Eight photos across the four galleries still have empty `location` / `date` / `filmstock`. Only the user knows these values — **never invent them**.
+- Nine photos across the five galleries still have empty `location` / `date` / `filmstock`. Only the user knows these values — **never invent them**.
 - The about-page portrait is still the placeholder (`photos/Trasher-cat-with-sunglasses.webp`).
-- No custom `404.html`.
 - No cache-control headers configured on nginx (see `07-deployment.md`).

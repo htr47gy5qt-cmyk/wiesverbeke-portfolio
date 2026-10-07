@@ -120,6 +120,7 @@ python3 patch_seo_jsonld.py
 
 These ran once, did their job, and were deleted. Their effects are baked into the current files. Listed here so you don't get confused finding them referenced in chat history.
 
+- **`serve.py`** — Local dev server (`python3 serve.py`, port 8000). Like `http.server` but resolves clean URLs (`/about` → `about.html`) and serves `404.html` for missing paths.
 - **`extract_to_json.py`** — Parsed old `<figure>`-heavy `project-*.html` files, extracted metadata, wrote initial `data/*.json`. **Done. Don't re-run** — it would overwrite hand-edited JSON.
 - **`fix_nav_placement.py`** — Fixed a bug from the first `patch_mobile_nav.py` run where the hamburger ended up in the wrong place. Done.
 - **`update_email.py`** — Replaced `wiesverbeke@icloud.com` with `wiesverbeke-photo@proton.me` everywhere. Done.

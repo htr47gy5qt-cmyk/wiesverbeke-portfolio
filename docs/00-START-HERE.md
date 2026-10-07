@@ -24,7 +24,7 @@ Read these files **in order**. They are designed to bring you fully up to speed 
 - **OS**: macOS (uses `sips` for image work). Project lives at `~/my-portfolio/`.
 - **Tech**: Pure HTML/CSS/JS, no frameworks, no build step (in the bundler sense). Python scripts for one-off patches.
 - **Live host**: self-managed Hetzner VPS in Helsinki (Ubuntu + nginx), deployed via Coolify. Domain at zone.eu. **Deploy = `git push`** — Coolify watches the repo and auto-deploys.
-- **Local dev**: `cd ~/my-portfolio && python3 -m http.server 8000` then visit `http://localhost:8000/<page>.html`. **You cannot use `file://` URLs** because `script.js` uses `fetch()` for JSON gallery data — browsers block fetch over `file://`.
+- **Local dev**: `cd ~/my-portfolio && python3 serve.py` then visit `http://localhost:8000/<page>` (no `.html` — `serve.py` understands clean URLs; plain `http.server` does not). **You cannot use `file://` URLs** because `script.js` uses `fetch()` for JSON gallery data — browsers block fetch over `file://`.
 
 ## Golden rules
 
